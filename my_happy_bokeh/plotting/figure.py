@@ -49,8 +49,7 @@ __all__ = (
 #-----------------------------------------------------------------------------
 
 class Figure(Plot):
-    '''
-    Create a new Figure for plotting.
+    ''' Create a new Figure for plotting.
 
     A subclass of :class:`~bokeh.models.plots.Plot` that simplifies plot
     creation with default axes, grids, tools, etc.

@@ -1,10 +1,5 @@
-#-----------------------------------------------------------------------------
-# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
-# All rights reserved.
-#
-# The full license is in the file LICENSE.txt, distributed with this software.
-#-----------------------------------------------------------------------------
-''' Models for mapping values from one range or space to another in the client.
+'''
+Models for mapping values from one range or space to another in the client.
 
 Mappers (as opposed to scales) are not presumed to be invertible.
 
@@ -66,14 +61,16 @@ __all__ = (
 
 @abstract
 class Mapper(Transform):
-    ''' Base class for mappers.
+    '''
+    Base class for mappers.
 
     '''
     pass
 
 @abstract
 class ColorMapper(Mapper):
-    ''' Base class for color mapper types.
+    '''
+    Base class for color mapper types.
 
     '''
 
@@ -95,7 +92,8 @@ class ColorMapper(Mapper):
 
 @abstract
 class CategoricalMapper(Mapper):
-    ''' Base class for mappers that map categorical factors to other values.
+    '''
+    Base class for mappers that map categorical factors to other values.
 
     '''
 
@@ -133,7 +131,8 @@ class CategoricalMapper(Mapper):
 
 
 class CategoricalColorMapper(CategoricalMapper, ColorMapper):
-    ''' Map categorical factors to colors.
+    '''
+    Map categorical factors to colors.
 
     Values that are passed to this mapper that are not in the factors list
     will be mapped to ``nan_color``.
@@ -150,7 +149,8 @@ class CategoricalColorMapper(CategoricalMapper, ColorMapper):
                 warnings.warn("Palette length does not match number of factors. %s will be assigned to `nan_color` %s" % (extra_factors, self.nan_color))
 
 class CategoricalMarkerMapper(CategoricalMapper):
-    ''' Map categorical factors to marker types.
+    '''
+    Map categorical factors to marker types.
 
     Values that are passed to this mapper that are not in the factors list
     will be mapped to ``default_value``.
@@ -171,7 +171,8 @@ class CategoricalMarkerMapper(CategoricalMapper):
     """)
 
 class CategoricalPatternMapper(CategoricalMapper):
-    ''' Map categorical factors to hatch fill patterns.
+    '''
+    Map categorical factors to hatch fill patterns.
 
     Values that are passed to this mapper that are not in the factors list
     will be mapped to ``default_value``.
@@ -191,7 +192,8 @@ class CategoricalPatternMapper(CategoricalMapper):
 
 @abstract
 class ContinuousColorMapper(ColorMapper):
-    ''' Base class for continuous color mapper types.
+    '''
+    Base class for continuous color mapper types.
 
     '''
 
@@ -221,7 +223,8 @@ class ContinuousColorMapper(ColorMapper):
     """)
 
 class LinearColorMapper(ContinuousColorMapper):
-    ''' Map numbers in a range [*low*, *high*] linearly into a sequence of
+    '''
+    Map numbers in a range [*low*, *high*] linearly into a sequence of
     colors (a palette).
 
     For example, if the range is [0, 99] and the palette is
@@ -236,7 +239,8 @@ class LinearColorMapper(ContinuousColorMapper):
     '''
 
 class LogColorMapper(ContinuousColorMapper):
-    ''' Map numbers in a range [*low*, *high*] into a sequence of colors
+    '''
+    Map numbers in a range [*low*, *high*] into a sequence of colors
     (a palette) on a natural logarithm scale.
 
     For example, if the range is [0, 25] and the palette is

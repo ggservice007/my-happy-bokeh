@@ -1,10 +1,5 @@
-#-----------------------------------------------------------------------------
-# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
-# All rights reserved.
-#
-# The full license is in the file LICENSE.txt, distributed with this software.
-#-----------------------------------------------------------------------------
-''' Models for computing good tick locations on different kinds
+'''
+Models for computing good tick locations on different kinds
 of plots.
 
 '''
@@ -54,13 +49,15 @@ __all__ = (
 
 @abstract
 class Ticker(Model):
-    ''' A base class for all ticker types.
+    '''
+    A base class for all ticker types.
 
     '''
 
 @abstract
 class ContinuousTicker(Ticker):
-    ''' A base class for non-categorical ticker types.
+    '''
+    A base class for non-categorical ticker types.
 
     '''
 
@@ -80,7 +77,8 @@ class ContinuousTicker(Ticker):
     """)
 
 class FixedTicker(ContinuousTicker):
-    ''' Generate ticks at fixed, explicitly supplied locations.
+    '''
+    Generate ticks at fixed, explicitly supplied locations.
 
     .. note::
         The ``desired_num_ticks`` property is ignored by this Ticker.
@@ -96,7 +94,8 @@ class FixedTicker(ContinuousTicker):
     """)
 
 class AdaptiveTicker(ContinuousTicker):
-    ''' Generate "nice" round ticks at any magnitude.
+    '''
+    Generate "nice" round ticks at any magnitude.
 
     Creates ticks that are "base" multiples of a set of given
     mantissas. For example, with ``base=10`` and
@@ -126,7 +125,8 @@ class AdaptiveTicker(ContinuousTicker):
     """)
 
 class CompositeTicker(ContinuousTicker):
-    ''' Combine different tickers at different scales.
+    '''
+    Combine different tickers at different scales.
 
     Uses the ``min_interval`` and ``max_interval`` interval attributes
     of the tickers to select the appropriate ticker at different
@@ -144,7 +144,8 @@ class CompositeTicker(ContinuousTicker):
     """)
 
 class SingleIntervalTicker(ContinuousTicker):
-    ''' Generate evenly spaced ticks at a fixed interval regardless of
+    '''
+    Generate evenly spaced ticks at a fixed interval regardless of
     scale.
 
     '''
@@ -154,7 +155,8 @@ class SingleIntervalTicker(ContinuousTicker):
     """)
 
 class DaysTicker(SingleIntervalTicker):
-    ''' Generate ticks spaced apart by specific, even multiples of days.
+    '''
+    Generate ticks spaced apart by specific, even multiples of days.
 
     '''
     days = Seq(Int, default=[], help="""
@@ -164,7 +166,8 @@ class DaysTicker(SingleIntervalTicker):
     num_minor_ticks = Override(default=0)
 
 class MonthsTicker(SingleIntervalTicker):
-    ''' Generate ticks spaced apart by specific, even multiples of months.
+    '''
+    Generate ticks spaced apart by specific, even multiples of months.
 
     '''
     months = Seq(Int, default=[], help="""
@@ -172,12 +175,14 @@ class MonthsTicker(SingleIntervalTicker):
     """)
 
 class YearsTicker(SingleIntervalTicker):
-    ''' Generate ticks spaced apart even numbers of years.
+    '''
+    Generate ticks spaced apart even numbers of years.
 
     '''
 
 class BasicTicker(AdaptiveTicker):
-    ''' Generate ticks on a linear scale.
+    '''
+    Generate ticks on a linear scale.
 
     .. note::
         This class may be renamed to ``LinearTicker`` in the future.
@@ -185,14 +190,16 @@ class BasicTicker(AdaptiveTicker):
     '''
 
 class LogTicker(AdaptiveTicker):
-    ''' Generate ticks on a log scale.
+    '''
+    Generate ticks on a log scale.
 
     '''
     mantissas = Override(default=[1, 5])
 
 
 class MercatorTicker(BasicTicker):
-    ''' Generate nice lat/lon ticks form underlying WebMercator coordinates.
+    '''
+    Generate nice lat/lon ticks form underlying WebMercator coordinates.
 
     '''
 
@@ -219,7 +226,8 @@ class MercatorTicker(BasicTicker):
             return str(self)
 
 class CategoricalTicker(Ticker):
-    ''' Generate ticks for categorical ranges.
+    '''
+    Generate ticks for categorical ranges.
 
     '''
 
@@ -232,7 +240,8 @@ ONE_MONTH = 30 * ONE_DAY # An approximation, obviously.
 ONE_YEAR = 365 * ONE_DAY
 
 class DatetimeTicker(CompositeTicker):
-    ''' Generate nice ticks across different date and time scales.
+    '''
+    Generate nice ticks across different date and time scales.
 
     '''
 

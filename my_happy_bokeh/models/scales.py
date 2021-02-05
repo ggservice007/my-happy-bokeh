@@ -1,9 +1,3 @@
-#-----------------------------------------------------------------------------
-# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
-# All rights reserved.
-#
-# The full license is in the file LICENSE.txt, distributed with this software.
-#-----------------------------------------------------------------------------
 '''
 
 '''
@@ -39,7 +33,8 @@ __all__ = (
 
 @abstract
 class Scale(Transform):
-    ''' Base class for ``Scale`` models that represent an invertible
+    '''
+    Base class for ``Scale`` models that represent an invertible
     computation to be carried out on the client-side.
 
     JavaScript implementations should implement the following methods:
@@ -66,26 +61,30 @@ class Scale(Transform):
     pass
 
 class ContinuousScale(Scale):
-    ''' Represent a scale transformation between continuous ranges.
+    '''
+    Represent a scale transformation between continuous ranges.
 
     '''
     pass
 
 
 class LinearScale(ContinuousScale):
-    ''' Represent a linear scale transformation between continuous ranges.
+    '''
+    Represent a linear scale transformation between continuous ranges.
 
     '''
     pass
 
 class LogScale(ContinuousScale):
-    ''' Represent a log scale transformation between continuous ranges.
+    '''
+    Represent a log scale transformation between continuous ranges.
 
     '''
     pass
 
 class CategoricalScale(Scale):
-    ''' Represent a scale transformation between a categorical source range and
+    '''
+    Represent a scale transformation between a categorical source range and
     continuous target range.
 
     '''

@@ -1,10 +1,5 @@
-#-----------------------------------------------------------------------------
-# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
-# All rights reserved.
-#
-# The full license is in the file LICENSE.txt, distributed with this software.
-#-----------------------------------------------------------------------------
-''' Represent transformations of data to happen on the client (browser) side.
+'''
+Represent transformations of data to happen on the client (browser) side.
 
 '''
 
@@ -55,7 +50,8 @@ __all__ = (
 
 @abstract
 class Transform(Model):
-    ''' Base class for ``Transform`` models that represent a computation
+    '''
+    Base class for ``Transform`` models that represent a computation
     to be carried out on the client-side.
 
     JavaScript implementations should implement the following methods:
@@ -75,7 +71,8 @@ class Transform(Model):
 
 
 class CustomJSTransform(Transform):
-    ''' Apply a custom defined transform to data.
+    '''
+    Apply a custom defined transform to data.
 
     .. warning::
         The explicit purpose of this Bokeh Model is to embed *raw JavaScript
@@ -131,7 +128,8 @@ class CustomJSTransform(Transform):
 
 
 class Dodge(Transform):
-    ''' Apply either fixed dodge amount to data.
+    '''
+    Apply either fixed dodge amount to data.
 
     '''
 
@@ -146,7 +144,8 @@ class Dodge(Transform):
 
 
 class Jitter(Transform):
-    ''' Apply either a uniform or normally sampled random jitter to data.
+    '''
+    Apply either a uniform or normally sampled random jitter to data.
 
     '''
 
@@ -170,7 +169,8 @@ class Jitter(Transform):
 
 @abstract
 class Interpolator(Transform):
-    ''' Base class for interpolator transforms.
+    '''
+    Base class for interpolator transforms.
 
     Interpolators return the value of a function which has been evaluated
     between specified (x, y) pairs of data.  As an example, if two control
@@ -222,7 +222,8 @@ class Interpolator(Transform):
 
 
 class LinearInterpolator(Interpolator):
-    ''' Compute a linear interpolation between the control points provided through
+    '''
+    Compute a linear interpolation between the control points provided through
     the ``x``, ``y``, and ``data`` parameters.
 
     '''
@@ -230,7 +231,8 @@ class LinearInterpolator(Interpolator):
 
 
 class StepInterpolator(Interpolator):
-    ''' Compute a step-wise interpolation between the points provided through
+    '''
+    Compute a step-wise interpolation between the points provided through
     the ``x``, ``y``, and ``data`` parameters.
 
     '''

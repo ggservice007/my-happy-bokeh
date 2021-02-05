@@ -1,10 +1,5 @@
-#-----------------------------------------------------------------------------
-# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
-# All rights reserved.
-#
-# The full license is in the file LICENSE.txt, distributed with this software.
-#-----------------------------------------------------------------------------
-''' Models for representing top-level plot objects.
+'''
+Models for representing top-level plot objects.
 
 '''
 
@@ -78,7 +73,8 @@ _VALID_PLACES = ('left', 'right', 'above', 'below', 'center')
 #-----------------------------------------------------------------------------
 
 class Plot(LayoutDOM):
-    ''' Model representing a plot, containing glyphs, guides, annotations.
+    '''
+    Model representing a plot, containing glyphs, guides, annotations.
 
     '''
 
@@ -140,7 +136,8 @@ class Plot(LayoutDOM):
         return _list_attr_splat(find(self.references(), selector, {'plot': self}))
 
     def row(self, row, gridplot):
-        ''' Return whether this plot is in a given row of a GridPlot.
+        '''
+        Return whether this plot is in a given row of a GridPlot.
 
         Args:
             row (int) : index of the row to test
@@ -153,7 +150,8 @@ class Plot(LayoutDOM):
         return self in gridplot.row(row)
 
     def column(self, col, gridplot):
-        ''' Return whether this plot is in a given column of a GridPlot.
+        '''
+        Return whether this plot is in a given column of a GridPlot.
 
         Args:
             col (int) : index of the column to test
@@ -174,28 +172,32 @@ class Plot(LayoutDOM):
 
     @property
     def xaxis(self):
-        ''' Splattable list of :class:`~bokeh.models.axes.Axis` objects for the x dimension.
+        '''
+        Splattable list of :class:`~bokeh.models.axes.Axis` objects for the x dimension.
 
         '''
         return self._axis("above", "below")
 
     @property
     def yaxis(self):
-        ''' Splattable list of :class:`~bokeh.models.axes.Axis` objects for the y dimension.
+        '''
+        Splattable list of :class:`~bokeh.models.axes.Axis` objects for the y dimension.
 
         '''
         return self._axis("left", "right")
 
     @property
     def axis(self):
-        ''' Splattable list of :class:`~bokeh.models.axes.Axis` objects.
+        '''
+        Splattable list of :class:`~bokeh.models.axes.Axis` objects.
 
         '''
         return _list_attr_splat(self.xaxis + self.yaxis)
 
     @property
     def legend(self):
-        ''' Splattable list of :class:`~bokeh.models.annotations.Legend` objects.
+        '''
+        Splattable list of :class:`~bokeh.models.annotations.Legend` objects.
 
         '''
         panels = self.above + self.below + self.left + self.right + self.center
@@ -204,7 +206,8 @@ class Plot(LayoutDOM):
 
     @property
     def hover(self):
-        ''' Splattable list of :class:`~bokeh.models.tools.HoverTool` objects.
+        '''
+        Splattable list of :class:`~bokeh.models.tools.HoverTool` objects.
 
         '''
         hovers = [obj for obj in self.tools if isinstance(obj, HoverTool)]
@@ -216,21 +219,24 @@ class Plot(LayoutDOM):
 
     @property
     def xgrid(self):
-        ''' Splattable list of :class:`~bokeh.models.grids.Grid` objects for the x dimension.
+        '''
+        Splattable list of :class:`~bokeh.models.grids.Grid` objects for the x dimension.
 
         '''
         return self._grid(0)
 
     @property
     def ygrid(self):
-        ''' Splattable list of :class:`~bokeh.models.grids.Grid` objects for the y dimension.
+        '''
+        Splattable list of :class:`~bokeh.models.grids.Grid` objects for the y dimension.
 
         '''
         return self._grid(1)
 
     @property
     def grid(self):
-        ''' Splattable list of :class:`~bokeh.models.grids.Grid` objects.
+        '''
+        Splattable list of :class:`~bokeh.models.grids.Grid` objects.
 
         '''
         return _list_attr_splat(self.xgrid + self.ygrid)
@@ -244,7 +250,8 @@ class Plot(LayoutDOM):
         self.toolbar.tools = tools
 
     def add_layout(self, obj, place='center'):
-        ''' Adds an object to the plot in a specified place.
+        '''
+        Adds an object to the plot in a specified place.
 
         Args:
             obj (Renderer) : the object to add to the Plot
@@ -263,7 +270,8 @@ class Plot(LayoutDOM):
         getattr(self, place).append(obj)
 
     def add_tools(self, *tools):
-        ''' Adds tools to the plot.
+        '''
+        Adds tools to the plot.
 
         Args:
             *tools (Tool) : the tools to add to the Plot
@@ -279,7 +287,8 @@ class Plot(LayoutDOM):
             self.toolbar.tools.append(tool)
 
     def add_glyph(self, source_or_glyph, glyph=None, **kw):
-        ''' Adds a glyph to the plot with associated data sources and ranges.
+        '''
+        Adds a glyph to the plot with associated data sources and ranges.
 
         This function will take care of creating and configuring a Glyph object,
         and then add it to the plot's list of renderers.
@@ -313,7 +322,8 @@ class Plot(LayoutDOM):
         return g
 
     def add_tile(self, tile_source, **kw):
-        ''' Adds new ``TileRenderer`` into ``Plot.renderers``
+        '''
+        Adds new ``TileRenderer`` into ``Plot.renderers``
 
         Args:
             tile_source (TileSource) : a tile source instance which contain tileset configuration
@@ -767,7 +777,8 @@ class _legend_attr_splat(_list_attr_splat):
         return super().__setattr__(attr, value)
 
 def _select_helper(args, kwargs):
-    """ Allow flexible selector syntax.
+    """
+    Allow flexible selector syntax.
 
     Returns:
         dict

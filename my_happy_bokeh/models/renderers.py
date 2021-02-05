@@ -1,10 +1,5 @@
-#-----------------------------------------------------------------------------
-# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
-# All rights reserved.
-#
-# The full license is in the file LICENSE.txt, distributed with this software.
-#-----------------------------------------------------------------------------
-''' Models (mostly base classes) for the various kinds of renderer
+'''
+Models (mostly base classes) for the various kinds of renderer
 types that Bokeh supports.
 
 '''
@@ -72,7 +67,8 @@ __all__ = (
 
 @abstract
 class Renderer(Model):
-    '''An abstract base class for renderer types.
+    '''
+    An abstract base class for renderer types.
 
     '''
 
@@ -97,7 +93,8 @@ class Renderer(Model):
 
 @abstract
 class DataRenderer(Renderer):
-    ''' An abstract base class for data renderer types (e.g. ``GlyphRenderer``, ``TileRenderer``, ``GraphRenderer``).
+    '''
+    An abstract base class for data renderer types (e.g. ``GlyphRenderer``, ``TileRenderer``, ``GraphRenderer``).
 
     '''
 

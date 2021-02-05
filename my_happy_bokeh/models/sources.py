@@ -1,11 +1,4 @@
 #-----------------------------------------------------------------------------
-# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
-# All rights reserved.
-#
-# The full license is in the file LICENSE.txt, distributed with this software.
-#-----------------------------------------------------------------------------
-
-#-----------------------------------------------------------------------------
 # Boilerplate
 #-----------------------------------------------------------------------------
 import logging # isort:skip
@@ -66,7 +59,8 @@ __all__ = (
 
 @abstract
 class DataSource(Model):
-    ''' A base class for data source types.
+    '''
+    A base class for data source types.
 
     '''
 
@@ -78,7 +72,8 @@ class DataSource(Model):
 
 @abstract
 class ColumnarDataSource(DataSource):
-    ''' A base class for data source types, which can be mapped onto
+    '''
+    A base class for data source types, which can be mapped onto
     a columnar format.
 
     '''
@@ -88,7 +83,8 @@ class ColumnarDataSource(DataSource):
     """)
 
 class ColumnDataSource(ColumnarDataSource):
-    ''' Maps names of columns to sequences or arrays.
+    '''
+    Maps names of columns to sequences or arrays.
 
     The ``ColumnDataSource`` is a fundamental data structure of Bokeh. Most
     plots, data tables, etc. will be driven by a ``ColumnDataSource``.
@@ -175,7 +171,8 @@ class ColumnDataSource(ColumnarDataSource):
                     "Current lengths: %s" % ", ".join(sorted(str((k, len(v))) for k, v in data.items())), BokehUserWarning))
 
     def __init__(self, *args, **kw):
-        ''' If called with a single argument that is a dict or
+        '''
+        If called with a single argument that is a dict or
         ``pandas.DataFrame``, treat that implicitly as the "data" attribute.
 
         '''
@@ -197,14 +194,16 @@ class ColumnDataSource(ColumnarDataSource):
 
     @property
     def column_names(self):
-        ''' A list of the column names in this data source.
+        '''
+        A list of the column names in this data source.
 
         '''
         return list(self.data)
 
     @staticmethod
     def _data_from_df(df):
-        ''' Create a ``dict`` of columns from a Pandas ``DataFrame``,
+        '''
+        Create a ``dict`` of columns from a Pandas ``DataFrame``,
         suitable for creating a ColumnDataSource.
 
         Args:
@@ -244,7 +243,8 @@ class ColumnDataSource(ColumnarDataSource):
 
     @staticmethod
     def _data_from_groupby(group):
-        ''' Create a ``dict`` of columns from a Pandas ``GroupBy``,
+        '''
+        Create a ``dict`` of columns from a Pandas ``GroupBy``,
         suitable for creating a ``ColumnDataSource``.
 
         The data generated is the result of running ``describe``
@@ -293,7 +293,8 @@ class ColumnDataSource(ColumnarDataSource):
 
     @classmethod
     def from_df(cls, data):
-        ''' Create a ``dict`` of columns from a Pandas ``DataFrame``,
+        '''
+        Create a ``dict`` of columns from a Pandas ``DataFrame``,
         suitable for creating a ``ColumnDataSource``.
 
         Args:
@@ -307,7 +308,8 @@ class ColumnDataSource(ColumnarDataSource):
 
     @classmethod
     def from_groupby(cls, data):
-        ''' Create a ``dict`` of columns from a Pandas ``GroupBy``,
+        '''
+        Create a ``dict`` of columns from a Pandas ``GroupBy``,
         suitable for creating a ``ColumnDataSource``.
 
         The data generated is the result of running ``describe``
@@ -323,7 +325,8 @@ class ColumnDataSource(ColumnarDataSource):
         return cls._data_from_df(data.describe())
 
     def to_df(self):
-        ''' Convert this data source to pandas ``DataFrame``.
+        '''
+        Convert this data source to pandas ``DataFrame``.
 
         Returns:
             DataFrame
@@ -334,7 +337,8 @@ class ColumnDataSource(ColumnarDataSource):
         return pd.DataFrame(self.data)
 
     def add(self, data, name=None):
-        ''' Appends a new column of data to the data source.
+        '''
+        Appends a new column of data to the data source.
 
         Args:
             data (seq) : new data to add
@@ -355,7 +359,8 @@ class ColumnDataSource(ColumnarDataSource):
 
 
     def remove(self, name):
-        ''' Remove a column of data.
+        '''
+        Remove a column of data.
 
         Args:
             name (str) : name of the column to remove
@@ -373,7 +378,8 @@ class ColumnDataSource(ColumnarDataSource):
             warnings.warn("Unable to find column '%s' in data source" % name)
 
     def stream(self, new_data, rollover=None):
-        ''' Efficiently update data source columns with new append-only data.
+        '''
+        Efficiently update data source columns with new append-only data.
 
         In cases where it is necessary to update data columns in, this method
         can efficiently send only the new data, instead of requiring the
@@ -415,7 +421,8 @@ class ColumnDataSource(ColumnarDataSource):
         self._stream(new_data, rollover)
 
     def _stream(self, new_data, rollover=None, setter=None):
-        ''' Internal implementation to efficiently update data source columns
+        '''
+        Internal implementation to efficiently update data source columns
         with new append-only data. The internal implementation adds the setter
         attribute.  [https://github.com/bokeh/bokeh/issues/6577]
 
@@ -527,7 +534,8 @@ class ColumnDataSource(ColumnarDataSource):
         self.data._stream(self.document, self, new_data, rollover, setter)
 
     def patch(self, patches, setter=None):
-        ''' Efficiently update data source columns at specific locations
+        '''
+        Efficiently update data source columns at specific locations
 
         If it is only necessary to update a small subset of data in a
         ``ColumnDataSource``, this method can be used to efficiently update only
@@ -684,7 +692,8 @@ class ColumnDataSource(ColumnarDataSource):
         self.data._patch(self.document, self, patches, setter)
 
 class CDSView(Model):
-    ''' A view into a ``ColumnDataSource`` that represents a row-wise subset.
+    '''
+    A view into a ``ColumnDataSource`` that represents a row-wise subset.
 
     '''
 
@@ -710,7 +719,8 @@ class GeoJSONDataSource(ColumnarDataSource):
 
 @abstract
 class WebSource(ColumnDataSource):
-    ''' Base class for web column data sources that can update from data
+    '''
+    Base class for web column data sources that can update from data
     URLs.
 
     .. note::
@@ -745,13 +755,15 @@ class WebSource(ColumnDataSource):
     """)
 
 class ServerSentDataSource(WebSource):
-    ''' A data source that can populate columns by receiving server sent
+    '''
+    A data source that can populate columns by receiving server sent
     events endpoints.
 
     '''
 
 class AjaxDataSource(WebSource):
-    ''' A data source that can populate columns by making Ajax calls to REST
+    '''
+    A data source that can populate columns by making Ajax calls to REST
     endpoints.
 
     The ``AjaxDataSource`` can be especially useful if you want to make a

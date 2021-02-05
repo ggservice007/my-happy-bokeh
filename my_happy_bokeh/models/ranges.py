@@ -1,10 +1,5 @@
-#-----------------------------------------------------------------------------
-# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
-# All rights reserved.
-#
-# The full license is in the file LICENSE.txt, distributed with this software.
-#-----------------------------------------------------------------------------
-''' Models for describing different kinds of ranges of values
+'''
+Models for describing different kinds of ranges of values
 in different kinds of spaces (e.g., continuous or categorical)
 and with options for "auto sizing".
 
@@ -63,12 +58,14 @@ __all__ = (
 
 @abstract
 class Range(Model):
-    ''' A base class for all range types.
+    '''
+    A base class for all range types.
 
     '''
 
 class Range1d(Range):
-    ''' A fixed, closed range [start, end] in a continuous scalar
+    '''
+    A fixed, closed range [start, end] in a continuous scalar
     dimension.
 
     In addition to supplying ``start`` and ``end`` keyword arguments
@@ -144,7 +141,8 @@ class Range1d(Range):
 
 @abstract
 class DataRange(Range):
-    ''' A base class for all data range types.
+    '''
+    A base class for all data range types.
 
     '''
 
@@ -161,7 +159,8 @@ class DataRange(Range):
 
 
 class DataRange1d(DataRange):
-    ''' An auto-fitting range in a continuous scalar dimension.
+    '''
+    An auto-fitting range in a continuous scalar dimension.
 
     By default the ``start`` and ``end`` of the range automatically
     assume min and max values of the data for associated renderers.
@@ -271,7 +270,8 @@ class DataRange1d(DataRange):
 
 
 class FactorRange(Range):
-    ''' A Range of values for a categorical dimension.
+    '''
+    A Range of values for a categorical dimension.
 
     In addition to supplying ``factors`` as a keyword argument to the
     ``FactorRange`` initializer, you may also instantiate with a sequence of

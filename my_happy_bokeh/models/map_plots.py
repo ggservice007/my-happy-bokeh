@@ -1,10 +1,5 @@
-#-----------------------------------------------------------------------------
-# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
-# All rights reserved.
-#
-# The full license is in the file LICENSE.txt, distributed with this software.
-#-----------------------------------------------------------------------------
-''' Models for displaying maps in Bokeh plots.
+'''
+Models for displaying maps in Bokeh plots.
 
 '''
 
@@ -59,7 +54,8 @@ __all__ = (
 
 @abstract
 class MapOptions(Model):
-    ''' Abstract base class for map options' models.
+    '''
+    Abstract base class for map options' models.
 
     '''
 
@@ -77,7 +73,8 @@ class MapOptions(Model):
 
 @abstract
 class MapPlot(Plot):
-    ''' Abstract base class for map plot models.
+    '''
+    Abstract base class for map plot models.
 
     '''
 
@@ -97,7 +94,8 @@ class MapPlot(Plot):
             return "%s.y_range" % str(self)
 
 class GMapOptions(MapOptions):
-    ''' Options for ``GMapPlot`` objects.
+    '''
+    Options for ``GMapPlot`` objects.
 
     '''
 
@@ -132,7 +130,8 @@ class GMapOptions(MapOptions):
     """)
 
 class GMapPlot(MapPlot):
-    ''' A Bokeh Plot with a `Google Map`_ displayed underneath.
+    '''
+    A Bokeh Plot with a `Google Map`_ displayed underneath.
 
     Data placed on this plot should be specified in decimal lat/lon coordinates
     e.g. ``(37.123, -122.404)``. It will be automatically converted into the

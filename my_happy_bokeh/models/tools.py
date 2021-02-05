@@ -1,9 +1,3 @@
-#-----------------------------------------------------------------------------
-# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
-# All rights reserved.
-#
-# The full license is in the file LICENSE.txt, distributed with this software.
-#-----------------------------------------------------------------------------
 ''' Bokeh comes with a number of interactive tools.
 
 There are five types of tool interactions:
@@ -142,7 +136,8 @@ __all__ = (
 
 @abstract
 class Tool(Model):
-    ''' A base class for all interactive tool types.
+    '''
+    A base class for all interactive tool types.
 
     '''
 
@@ -167,42 +162,48 @@ class Tool(Model):
 
 @abstract
 class Action(Tool):
-    ''' A base class for tools that are buttons in the toolbar.
+    '''
+    A base class for tools that are buttons in the toolbar.
 
     '''
     pass
 
 @abstract
 class Gesture(Tool):
-    ''' A base class for tools that respond to drag events.
+    '''
+    A base class for tools that respond to drag events.
 
     '''
     pass
 
 @abstract
 class Drag(Gesture):
-    ''' A base class for tools that respond to drag events.
+    '''
+    A base class for tools that respond to drag events.
 
     '''
     pass
 
 @abstract
 class Scroll(Gesture):
-    ''' A base class for tools that respond to scroll events.
+    '''
+    A base class for tools that respond to scroll events.
 
     '''
     pass
 
 @abstract
 class Tap(Gesture):
-    ''' A base class for tools that respond to tap/click events.
+    '''
+    A base class for tools that respond to tap/click events.
 
     '''
     pass
 
 @abstract
 class SelectTool(Gesture):
-    ''' A base class for tools that perfrom "selections", e.g. ``BoxSelectTool``.
+    '''
+    A base class for tools that perfrom "selections", e.g. ``BoxSelectTool``.
 
     '''
 
@@ -214,7 +215,8 @@ class SelectTool(Gesture):
 
 @abstract
 class Inspection(Gesture):
-    ''' A base class for tools that perform "inspections", e.g. ``HoverTool``.
+    '''
+    A base class for tools that perform "inspections", e.g. ``HoverTool``.
 
     '''
     toggleable = Bool(True, help="""
@@ -225,7 +227,8 @@ class Inspection(Gesture):
 
 @abstract
 class ToolbarBase(Model):
-    ''' A base class for different toolbars.
+    '''
+    A base class for different toolbars.
 
     '''
 
@@ -244,7 +247,8 @@ class ToolbarBase(Model):
     """)
 
 class Toolbar(ToolbarBase):
-    ''' Collect tools to display for a single plot.
+    '''
+    Collect tools to display for a single plot.
 
     '''
 
@@ -276,7 +280,8 @@ class Toolbar(ToolbarBase):
     """)
 
 class ProxyToolbar(ToolbarBase):
-    ''' A toolbar that allow to merge and proxy tools of toolbars in multiple
+    '''
+    A toolbar that allow to merge and proxy tools of toolbars in multiple
     plots.
 
     '''
@@ -285,7 +290,8 @@ class ProxyToolbar(ToolbarBase):
     """)
 
 class ToolbarBox(LayoutDOM):
-    ''' A layoutable toolbar that can accept the tools of multiple plots, and
+    '''
+    A layoutable toolbar that can accept the tools of multiple plots, and
     can merge the tools into a single button for convenience.
 
     '''
@@ -297,7 +303,8 @@ class ToolbarBox(LayoutDOM):
     toolbar_location = Enum(Location, default="right")
 
 class PanTool(Drag):
-    ''' *toolbar icon*: |pan_icon|
+    '''
+    *toolbar icon*: |pan_icon|
 
     The pan tool allows the user to pan a Plot by left-dragging a mouse, or on
     touch devices by dragging a finger or stylus, across the plot region.
@@ -329,7 +336,8 @@ DEFAULT_RANGE_OVERLAY = lambda: BoxAnnotation(
 )
 
 class RangeTool(Drag):
-    ''' *toolbar icon*: |range_icon|
+    '''
+    *toolbar icon*: |range_icon|
 
     The range tool allows the user to update range objects for either or both
     of the x- or y-dimensions by dragging a corresponding shaded annotation to
@@ -385,7 +393,8 @@ class RangeTool(Drag):
             return "At least one of RangeTool.x_range or RangeTool.y_range must be configured"
 
 class WheelPanTool(Scroll):
-    ''' *toolbar icon*: |wheel_pan_icon|
+    '''
+    *toolbar icon*: |wheel_pan_icon|
 
     The wheel pan tool allows the user to pan the plot along the configured
     dimension using the scroll wheel.
@@ -401,7 +410,8 @@ class WheelPanTool(Scroll):
     """)
 
 class WheelZoomTool(Scroll):
-    ''' *toolbar icon*: |wheel_zoom_icon|
+    '''
+    *toolbar icon*: |wheel_zoom_icon|
 
     The wheel zoom tool will zoom the plot in and out, centered on the
     current mouse location.
@@ -440,7 +450,8 @@ class WheelZoomTool(Scroll):
     """)
 
 class CustomAction(Action):
-    ''' Execute a custom action, e.g. ``CustomJS`` callback when a toolbar
+    '''
+    Execute a custom action, e.g. ``CustomJS`` callback when a toolbar
     icon is activated.
 
     Example:
@@ -470,7 +481,8 @@ class CustomAction(Action):
     """)
 
 class SaveTool(Action):
-    ''' *toolbar icon*: |save_icon|
+    '''
+    *toolbar icon*: |save_icon|
 
     The save tool is an action. When activated, the tool opens a download dialog
     which allows to save an image reproduction of the plot in PNG format. If
@@ -485,7 +497,8 @@ class SaveTool(Action):
     '''
 
 class ResetTool(Action):
-    ''' *toolbar icon*: |reset_icon|
+    '''
+    *toolbar icon*: |reset_icon|
 
     The reset tool is an action. When activated in the toolbar, the tool resets
     the data bounds of the plot to their values when the plot was initially
@@ -499,7 +512,8 @@ class ResetTool(Action):
     pass
 
 class TapTool(Tap, SelectTool):
-    ''' *toolbar icon*: |tap_icon|
+    '''
+    *toolbar icon*: |tap_icon|
 
     The tap selection tool allows the user to select at single points by
     left-clicking a mouse, or tapping with a finger.
@@ -566,7 +580,8 @@ class TapTool(Tap, SelectTool):
     """)
 
 class CrosshairTool(Inspection):
-    ''' *toolbar icon*: |crosshair_icon|
+    '''
+    *toolbar icon*: |crosshair_icon|
 
     The crosshair tool is a passive inspector tool. It is generally on at all
     times, but can be configured in the inspector's menu associated with the
@@ -630,7 +645,8 @@ DEFAULT_BOX_OVERLAY = lambda: BoxAnnotation(
 )
 
 class BoxZoomTool(Drag):
-    ''' *toolbar icon*: |box_zoom_icon|
+    '''
+    *toolbar icon*: |box_zoom_icon|
 
     The box zoom tool allows users to define a rectangular egion of a Plot to
     zoom to by dragging he mouse or a finger over the plot region. The end of
@@ -675,7 +691,8 @@ class BoxZoomTool(Drag):
     """)
 
 class ZoomInTool(Action):
-    ''' *toolbar icon*: |zoom_in_icon|
+    '''
+    *toolbar icon*: |zoom_in_icon|
 
     The zoom-in tool allows users to click a button to zoom in
     by a fixed amount.
@@ -697,7 +714,8 @@ class ZoomInTool(Action):
     """)
 
 class ZoomOutTool(Action):
-    ''' *toolbar icon*: |zoom_out_icon|
+    '''
+    *toolbar icon*: |zoom_out_icon|
 
     The zoom-out tool allows users to click a button to zoom out
     by a fixed amount.
@@ -718,7 +736,8 @@ class ZoomOutTool(Action):
     """)
 
 class BoxSelectTool(Drag, SelectTool):
-    ''' *toolbar icon*: |box_select_icon|
+    '''
+    *toolbar icon*: |box_select_icon|
 
     The box selection tool allows users to make selections on a Plot by showing
     a rectangular region by dragging the mouse or a finger over the plot area.
@@ -779,7 +798,8 @@ DEFAULT_POLY_OVERLAY = lambda: PolyAnnotation(
 )
 
 class LassoSelectTool(Drag, SelectTool):
-    ''' *toolbar icon*: |lasso_select_icon|
+    '''
+    *toolbar icon*: |lasso_select_icon|
 
     The lasso selection tool allows users to make selections on a Plot by
     indicating a free-drawn "lasso" region by dragging the mouse or a finger
@@ -820,7 +840,8 @@ class LassoSelectTool(Drag, SelectTool):
     """)
 
 class PolySelectTool(Tap, SelectTool):
-    ''' *toolbar icon*: |poly_select_icon|
+    '''
+    *toolbar icon*: |poly_select_icon|
 
     The polygon selection tool allows users to make selections on a
     Plot by indicating a polygonal region with mouse clicks. single
@@ -857,7 +878,8 @@ class PolySelectTool(Tap, SelectTool):
     """)
 
 class CustomJSHover(Model):
-    ''' Define a custom formatter to apply to a hover tool field.
+    '''
+    Define a custom formatter to apply to a hover tool field.
 
     This model can be configured with JavaScript code to format hover tooltips.
     The JavaScript code has access to the current value to format, some special
@@ -1174,7 +1196,8 @@ DEFAULT_HELP_TIP = "Click the question mark to learn more about Bokeh plot tools
 DEFAULT_HELP_URL = "https://docs.bokeh.org/en/latest/docs/user_guide/tools.html"
 
 class HelpTool(Action):
-    ''' A button tool to provide a "help" link to users.
+    '''
+    A button tool to provide a "help" link to users.
 
     The hover text can be customized through the ``help_tooltip`` attribute
     and the redirect site overridden as well.
@@ -1190,7 +1213,8 @@ class HelpTool(Action):
     """)
 
 class UndoTool(Action):
-    ''' *toolbar icon*: |undo_icon|
+    '''
+    *toolbar icon*: |undo_icon|
 
     Undo tool allows to restore previous state of the plot.
 
@@ -1200,7 +1224,8 @@ class UndoTool(Action):
     '''
 
 class RedoTool(Action):
-    ''' *toolbar icon*: |redo_icon|
+    '''
+    *toolbar icon*: |redo_icon|
 
     Redo tool reverses the last action performed by undo tool.
 
@@ -1211,7 +1236,8 @@ class RedoTool(Action):
 
 @abstract
 class EditTool(Gesture):
-    ''' A base class for all interactive draw tool types.
+    '''
+    A base class for all interactive draw tool types.
 
     '''
 
@@ -1304,7 +1330,8 @@ class BoxEditTool(EditTool, Drag, Tap):
             return "%s glyph type(s) found." % glyph_types
 
 class PointDrawTool(EditTool, Drag, Tap):
-    ''' *toolbar icon*: |point_draw_icon|
+    '''
+    *toolbar icon*: |point_draw_icon|
 
     The PointDrawTool allows adding, dragging and deleting point-like glyphs
     (i.e subclasses of``XYGlyph``) on one or more renderers by editing the
@@ -1363,7 +1390,8 @@ class PointDrawTool(EditTool, Drag, Tap):
             return "%s glyph type(s) found." % glyph_types
 
 class PolyDrawTool(EditTool, Drag, Tap):
-    ''' *toolbar icon*: |poly_draw_icon|
+    '''
+    *toolbar icon*: |poly_draw_icon|
 
     The PolyDrawTool allows drawing, selecting and deleting ``Patches`` and
     ``MultiLine`` glyphs on one or more renderers by editing the underlying
@@ -1430,7 +1458,8 @@ class PolyDrawTool(EditTool, Drag, Tap):
             return "glyph type %s found." % type(glyph).__name__
 
 class FreehandDrawTool(EditTool, Drag, Tap):
-    ''' *toolbar icon*: |freehand_draw_icon|
+    '''
+    *toolbar icon*: |freehand_draw_icon|
 
     Allows freehand drawing of ``Patches`` and ``MultiLine`` glyphs. The glyph
     to draw may be defined via the ``renderers`` property.
@@ -1469,7 +1498,8 @@ class FreehandDrawTool(EditTool, Drag, Tap):
             return "%s glyph type(s) found." % glyph_types
 
 class PolyEditTool(EditTool, Drag, Tap):
-    ''' *toolbar icon*: |poly_edit_icon|
+    '''
+    *toolbar icon*: |poly_edit_icon|
 
     The PolyEditTool allows editing the vertices of one or more ``Patches`` or
     ``MultiLine`` glyphs. Glyphs to be edited are defined via the ``renderers``
@@ -1522,7 +1552,8 @@ class PolyEditTool(EditTool, Drag, Tap):
 
 
 class LineEditTool(EditTool, Drag, Tap):
-    ''' *toolbar icon*: |line_edit_icon|
+    '''
+    *toolbar icon*: |line_edit_icon|
 
     The LineEditTool allows editing the intersection points of one or more ``Line`` glyphs.
     Glyphs to be edited are defined via the ``renderers``

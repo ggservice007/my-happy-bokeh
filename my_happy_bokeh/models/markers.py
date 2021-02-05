@@ -1,10 +1,5 @@
-#-----------------------------------------------------------------------------
-# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
-# All rights reserved.
-#
-# The full license is in the file LICENSE.txt, distributed with this software.
-#-----------------------------------------------------------------------------
-''' Display a variety of simple scatter marker shapes whose attributes
+'''
+Display a variety of simple scatter marker shapes whose attributes
 can be associated with data columns from ``ColumnDataSources``.
 
 The full list of markers built into Bokeh is given below:
@@ -115,7 +110,8 @@ __all__ = (
 
 @abstract
 class Marker(XYGlyph, LineGlyph, FillGlyph):
-    ''' Base class for glyphs that are simple markers with line and
+    '''
+    Base class for glyphs that are simple markers with line and
     fill properties, located at an (x, y) location with a specified
     size.
 
@@ -156,7 +152,8 @@ class Marker(XYGlyph, LineGlyph, FillGlyph):
     """)
 
 class Scatter(Marker):
-    ''' Render arbitrary markers according a specification.
+    '''
+    Render arbitrary markers according a specification.
 
     The Scatter can draw any built-in marker type. It can be configured
     to draw the same marker for all values by specifying the name of a

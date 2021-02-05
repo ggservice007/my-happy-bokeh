@@ -1,9 +1,3 @@
-#-----------------------------------------------------------------------------
-# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
-# All rights reserved.
-#
-# The full license is in the file LICENSE.txt, distributed with this software.
-#-----------------------------------------------------------------------------
 '''
 
 '''
@@ -40,7 +34,8 @@ __all__ = (
 #-----------------------------------------------------------------------------
 
 class TileSource(Model):
-    ''' A base class for all tile source types.
+    '''
+    A base class for all tile source types.
 
     In general, tile sources are used as a required input for ``TileRenderer``.
 
@@ -89,7 +84,8 @@ class TileSource(Model):
     """)
 
 class MercatorTileSource(TileSource):
-    ''' A base class for Mercator tile services (e.g. ``WMTSTileSource``).
+    '''
+    A base class for Mercator tile services (e.g. ``WMTSTileSource``).
 
     '''
 
@@ -115,7 +111,8 @@ class MercatorTileSource(TileSource):
     """)
 
 class TMSTileSource(MercatorTileSource):
-    ''' Contains tile config info and provides urls for tiles based on a
+    '''
+    Contains tile config info and provides urls for tiles based on a
     templated url e.g. ``http://your.tms.server.host/{Z}/{X}/{Y}.png``. The
     defining feature of TMS is the tile-origin in located at the bottom-left.
 
@@ -126,7 +123,8 @@ class TMSTileSource(MercatorTileSource):
     pass
 
 class WMTSTileSource(MercatorTileSource):
-    ''' Behaves much like ``TMSTileSource`` but has its tile-origin in the
+    '''
+    Behaves much like ``TMSTileSource`` but has its tile-origin in the
     top-left.
 
     This is the most common used tile source for web mapping applications.
@@ -137,7 +135,8 @@ class WMTSTileSource(MercatorTileSource):
     pass
 
 class QUADKEYTileSource(MercatorTileSource):
-    ''' Has the same tile origin as the ``WMTSTileSource`` but requests tiles using
+    '''
+    Has the same tile origin as the ``WMTSTileSource`` but requests tiles using
     a `quadkey` argument instead of X, Y, Z e.g.
     ``http://your.quadkey.tile.host/{Q}.png``
 
@@ -145,7 +144,8 @@ class QUADKEYTileSource(MercatorTileSource):
     pass
 
 class BBoxTileSource(MercatorTileSource):
-    ''' Has the same default tile origin as the ``WMTSTileSource`` but requested
+    '''
+    Has the same default tile origin as the ``WMTSTileSource`` but requested
     tiles use a ``{XMIN}``, ``{YMIN}``, ``{XMAX}``, ``{YMAX}`` e.g.
     ``http://your.custom.tile.service?bbox={XMIN},{YMIN},{XMAX},{YMAX}``.
 
