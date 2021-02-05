@@ -1,9 +1,3 @@
-#-----------------------------------------------------------------------------
-# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
-# All rights reserved.
-#
-# The full license is in the file LICENSE.txt, distributed with this software.
-#-----------------------------------------------------------------------------
 ''' Functions useful for dealing with hexagonal tilings.
 
 For more information on the concepts employed here, see this informative page

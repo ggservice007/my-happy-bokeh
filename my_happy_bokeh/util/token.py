@@ -1,10 +1,5 @@
-#-----------------------------------------------------------------------------
-# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
-# All rights reserved.
-#
-# The full license is in the file LICENSE.txt, distributed with this software.
-#-----------------------------------------------------------------------------
-''' Utilities for generating and manipulating session IDs.
+'''
+Utilities for generating and manipulating session IDs.
 
 A session ID would typically be associated with each browser tab viewing
 an application or plot. Each session has its own state separate from any
@@ -34,7 +29,7 @@ import time
 from typing import Any, Dict, Optional, Tuple, Union
 
 # Bokeh imports
-from bokeh.settings import settings
+from ..settings import settings
 
 #-----------------------------------------------------------------------------
 # Globals and constants
@@ -55,7 +50,8 @@ __all__ = (
 #-----------------------------------------------------------------------------
 
 def generate_secret_key() -> str:
-    ''' Generate a new securely-generated secret key appropriate for SHA-256
+    '''
+    Generate a new securely-generated secret key appropriate for SHA-256
     HMAC signatures.
 
     This key could be used to sign Bokeh server session IDs, for example.
@@ -64,7 +60,8 @@ def generate_secret_key() -> str:
 
 def generate_session_id(secret_key: Optional[bytes] = settings.secret_key_bytes(),
                         signed: bool = settings.sign_sessions()) -> str:
-    ''' Generate a random session ID.
+    '''
+    Generate a random session ID.
 
     Typically, each browser tab connected to a Bokeh application has its own
     session ID.  In production deployments of a Bokeh app, session IDs should be
@@ -81,7 +78,8 @@ def generate_jwt_token(session_id: str,
                        signed: bool = settings.sign_sessions(),
                        extra_payload: Optional[Dict[str, Any]] = None,
                        expiration: int = 300) -> str:
-    """Generates a JWT token given a session_id and additional payload.
+    """
+    Generates a JWT token given a session_id and additional payload.
 
     Args:
         session_id (str):
@@ -116,7 +114,8 @@ def generate_jwt_token(session_id: str,
     return token + '.' + _signature(token, secret_key)
 
 def get_session_id(token: str) -> Any:
-    """Extracts the session id from a JWT token.
+    """
+    Extracts the session id from a JWT token.
 
     Args:
         token (str):
@@ -129,7 +128,8 @@ def get_session_id(token: str) -> Any:
     return decoded['session_id']
 
 def get_token_payload(token: str) -> Any:
-    """Extract the payload from the token.
+    """
+    Extract the payload from the token.
 
     Args:
         token (str):
@@ -145,7 +145,8 @@ def get_token_payload(token: str) -> Any:
 def check_token_signature(token: str,
                           secret_key: Optional[bytes] = settings.secret_key_bytes(),
                           signed: Optional[bool] = settings.sign_sessions()) -> bool:
-    """Check the signature of a token and the contained signature.
+    """
+    Check the signature of a token and the contained signature.
 
     The server uses this function to check whether a token and the
     contained session id was generated with the correct secret key.
@@ -187,7 +188,8 @@ def check_token_signature(token: str,
 def check_session_id_signature(session_id: str,
                                secret_key: Optional[bytes] = settings.secret_key_bytes(),
                                signed: Optional[bool] = settings.sign_sessions()) -> bool:
-    """Check the signature of a session ID, returning True if it's valid.
+    """
+    Check the signature of a session ID, returning True if it's valid.
 
     The server uses this function to check whether a session ID was generated
     with the correct secret key. If signed sessions are disabled, this function

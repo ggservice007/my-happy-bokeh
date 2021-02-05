@@ -1,9 +1,4 @@
 '''
-Utilities for generating and manipulating session IDs.
-
-A session ID would typically be associated with each browser tab viewing
-an application or plot. Each session has its own state separate from any
-other sessions hosted by the server.
 
 '''
 
@@ -17,29 +12,48 @@ log = logging.getLogger(__name__)
 # Imports
 #-----------------------------------------------------------------------------
 
-# Bokeh imports
-from .deprecation import deprecated
-from .token import check_session_id_signature, generate_secret_key, generate_session_id
-
 #-----------------------------------------------------------------------------
 # Globals and constants
 #-----------------------------------------------------------------------------
 
 __all__ = (
-    'check_session_id_signature',
-    'generate_secret_key',
-    'generate_session_id',
+    'curdoc',
+    'set_curdoc',
 )
-
-deprecated("bokeh.util.session_id is deprecated, use bokeh.util.token module instead")
 
 #-----------------------------------------------------------------------------
 # General API
 #-----------------------------------------------------------------------------
 
+def curdoc():
+    ''' Return the document for the current default state.
+
+    Returns:
+        Document : the current default document object.
+
+    '''
+    from .state import curstate
+    return curstate().document
+
 #-----------------------------------------------------------------------------
 # Dev API
 #-----------------------------------------------------------------------------
+
+def set_curdoc(doc):
+    '''Configure the current document (returned by curdoc()).
+
+    Args:
+        doc (Document) : Document we will output.
+
+    Returns:
+        None
+
+    .. warning::
+        Calling this function will replace any existing document.
+
+    '''
+    from .state import curstate
+    curstate().document = doc
 
 #-----------------------------------------------------------------------------
 # Private API

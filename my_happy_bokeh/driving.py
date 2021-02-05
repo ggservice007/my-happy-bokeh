@@ -1,10 +1,5 @@
-#-----------------------------------------------------------------------------
-# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
-# All rights reserved.
-#
-# The full license is in the file LICENSE.txt, distributed with this software.
-#-----------------------------------------------------------------------------
-''' Provide a set of decorators useful for repeatedly updating a
+'''
+Provide a set of decorators useful for repeatedly updating a
 a function parameter in a specified way each time the function is
 called.
 

@@ -1,10 +1,5 @@
-#-----------------------------------------------------------------------------
-# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
-# All rights reserved.
-#
-# The full license is in the file LICENSE.txt, distributed with this software.
-#-----------------------------------------------------------------------------
-''' Pre-configured tile sources for common third party tile services.
+'''
+Pre-configured tile sources for common third party tile services.
 
 get_provider
     Use this function to retrieve an instance of a predefined tile provider.
@@ -130,7 +125,7 @@ import sys
 import types
 
 # Bokeh imports
-from bokeh.core.enums import enumeration
+from core.enums import enumeration
 
 #-----------------------------------------------------------------------------
 # Globals and constants

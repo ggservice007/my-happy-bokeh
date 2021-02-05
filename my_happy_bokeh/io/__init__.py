@@ -1,9 +1,4 @@
 '''
-Utilities for generating and manipulating session IDs.
-
-A session ID would typically be associated with each browser tab viewing
-an application or plot. Each session has its own state separate from any
-other sessions hosted by the server.
 
 '''
 
@@ -18,24 +13,38 @@ log = logging.getLogger(__name__)
 #-----------------------------------------------------------------------------
 
 # Bokeh imports
-from .deprecation import deprecated
-from .token import check_session_id_signature, generate_secret_key, generate_session_id
+from .doc import curdoc
+from .export import export_png, export_svgs
+from .notebook import install_jupyter_hooks, install_notebook_hook, push_notebook
+from .output import output_file, output_notebook, reset_output
+from .saving import save
+from .showing import show
 
 #-----------------------------------------------------------------------------
 # Globals and constants
 #-----------------------------------------------------------------------------
 
 __all__ = (
-    'check_session_id_signature',
-    'generate_secret_key',
-    'generate_session_id',
+    'curdoc',
+    'export_png',
+    'export_svgs',
+    'install_notebook_hook',
+    'push_notebook',
+    'output_file',
+    'output_notebook',
+    'save',
+    'show',
 )
-
-deprecated("bokeh.util.session_id is deprecated, use bokeh.util.token module instead")
 
 #-----------------------------------------------------------------------------
 # General API
 #-----------------------------------------------------------------------------
+
+
+
+
+
+
 
 #-----------------------------------------------------------------------------
 # Dev API
@@ -48,3 +57,6 @@ deprecated("bokeh.util.session_id is deprecated, use bokeh.util.token module ins
 #-----------------------------------------------------------------------------
 # Code
 #-----------------------------------------------------------------------------
+
+install_jupyter_hooks()
+del install_jupyter_hooks

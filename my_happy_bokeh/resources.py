@@ -1,9 +1,3 @@
-# -----------------------------------------------------------------------------
-# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
-# All rights reserved.
-#
-# The full license is in the file LICENSE.txt, distributed with this software.
-# -----------------------------------------------------------------------------
 """ The resources module provides the Resources class for easily configuring
 how BokehJS code and CSS resources should be located, loaded, and embedded in
 Bokeh documents.
