@@ -1,10 +1,5 @@
-#-----------------------------------------------------------------------------
-# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
-# All rights reserved.
-#
-# The full license is in the file LICENSE.txt, distributed with this software.
-#-----------------------------------------------------------------------------
-''' These define the standard error codes and messages for Bokeh
+'''
+These define the standard error codes and messages for Bokeh
 validation checks.
 
 1001 *(BAD_COLUMN_NAME)*

@@ -1,18 +1,10 @@
-''' 
-These define the standard warning codes and messages for Bokeh
-validation checks.
-
-1000 *(MISSING_RENDERERS)*
-    A |Plot| object has no renderers configured (will result in a blank plot).
-
-1002 *(EMPTY_LAYOUT)*
-    A layout model has no children (will result in a blank layout).
-
-1004 *(BOTH_CHILD_AND_ROOT)*
-    Each component can be rendered in only one place, can't be both a root and in a layout.
-
-9999 *(EXT)*
-    Indicates that a custom warning check has failed.
+#-----------------------------------------------------------------------------
+# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
+# All rights reserved.
+#
+# The full license is in the file LICENSE.txt, distributed with this software.
+#-----------------------------------------------------------------------------
+'''
 
 '''
 
@@ -26,25 +18,51 @@ log = logging.getLogger(__name__)
 # Imports
 #-----------------------------------------------------------------------------
 
+# Bokeh imports
+from ..core.enums import TextureRepetition
+from ..core.has_props import abstract
+from ..core.properties import Enum, String
+from ..model import Model
+
 #-----------------------------------------------------------------------------
 # Globals and constants
 #-----------------------------------------------------------------------------
 
-codes = {
-    1000: ("MISSING_RENDERERS",   "Plot has no renderers"),
-    1002: ("EMPTY_LAYOUT",        "Layout has no children"),
-    1004: ("BOTH_CHILD_AND_ROOT", "Models should not be a document root if they are in a layout box"),
-    1005: ("FIXED_SIZING_MODE",   "'fixed' sizing mode requires width and height to be set"),
-    1006: ("FIXED_WIDTH_POLICY",  "'fixed' width policy requires width to be set"),
-    1007: ("FIXED_HEIGHT_POLICY", "'fixed' height policy requires height to be set"),
-    9999: ("EXT",                 "Custom extension reports warning"),
-}
-
-__all__ = ()
+__all__ = (
+    'CanvasTexture',
+    'ImageURLTexture',
+    'Texture',
+)
 
 #-----------------------------------------------------------------------------
 # General API
 #-----------------------------------------------------------------------------
+
+@abstract
+class Texture(Model):
+    ''' Base class for ``Texture`` models that represent fill patterns.
+
+    '''
+    repetition = Enum(TextureRepetition, default="repeat", help="""
+
+    """)
+
+class CanvasTexture(Texture):
+    '''
+
+    '''
+    code = String(help="""
+    A snippet of JavaScript code to execute in the browser.
+
+    """)
+
+class ImageURLTexture(Texture):
+    '''
+
+    '''
+    url = String(help="""
+
+    """)
 
 #-----------------------------------------------------------------------------
 # Dev API
@@ -57,6 +75,3 @@ __all__ = ()
 #-----------------------------------------------------------------------------
 # Code
 #-----------------------------------------------------------------------------
-
-for code in codes:
-    exec("%s = %d" % (codes[code][0], code))

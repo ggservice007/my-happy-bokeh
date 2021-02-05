@@ -35,7 +35,8 @@ __all__ = (
 #-----------------------------------------------------------------------------
 
 def _validator(code_or_name, validator_type):
-    ''' Internal shared implementation to handle both error and warning
+    '''
+    Internal shared implementation to handle both error and warning
     validation checks.
 
     Args:
@@ -85,7 +86,8 @@ _warning = partial(_validator, validator_type="warning")
 #-----------------------------------------------------------------------------
 
 def error(code_or_name):
-    ''' Decorator to mark a validator method for a Bokeh error condition
+    '''
+    Decorator to mark a validator method for a Bokeh error condition
 
     Args:
         code_or_name (int or str) : a code from ``bokeh.validation.errors`` or a string label for a custom check
@@ -125,7 +127,8 @@ def error(code_or_name):
     return _error(code_or_name)
 
 def warning(code_or_name):
-    ''' Decorator to mark a validator method for a Bokeh error condition
+    '''
+    Decorator to mark a validator method for a Bokeh error condition
 
     Args:
         code_or_name (int or str) : a code from ``bokeh.validation.errors`` or a string label for a custom check

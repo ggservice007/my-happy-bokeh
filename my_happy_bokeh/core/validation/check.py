@@ -39,7 +39,8 @@ __all__ = (
 #-----------------------------------------------------------------------------
 
 def silence(warning: int, silence: bool = True) -> Set[int]:
-    ''' Silence a particular warning on all Bokeh models.
+    '''
+    Silence a particular warning on all Bokeh models.
 
     Args:
         warning (Warning) : Bokeh warning to silence
@@ -85,7 +86,8 @@ def silenced(warning: int) -> None:
         silence(warning, False)
 
 def check_integrity(models):
-    ''' Apply validation and integrity checks to a collection of Bokeh models.
+    '''
+    Apply validation and integrity checks to a collection of Bokeh models.
 
     Args:
         models (seq[Model]) : a collection of Models to test
