@@ -54,7 +54,8 @@ __all__ = (
 #-----------------------------------------------------------------------------
 
 class DocumentChangedEvent:
-    ''' Base class for all internal events representing a change to a
+    '''
+    Base class for all internal events representing a change to a
     Bokeh Document.
 
     '''
@@ -94,7 +95,8 @@ class DocumentChangedEvent:
         return False
 
     def dispatch(self, receiver):
-        ''' Dispatch handling of this event to a receiver.
+        '''
+        Dispatch handling of this event to a receiver.
 
         This method will invoke ``receiver._document_changed`` if it exists.
 
@@ -103,13 +105,15 @@ class DocumentChangedEvent:
             receiver._document_changed(self)
 
 class DocumentPatchedEvent(DocumentChangedEvent):
-    ''' A Base class for events that represent updating Bokeh Models and
+    '''
+    A Base class for events that represent updating Bokeh Models and
     their properties.
 
     '''
 
     def dispatch(self, receiver):
-        ''' Dispatch handling of this event to a receiver.
+        '''
+        Dispatch handling of this event to a receiver.
 
         This method will invoke ``receiver._document_patched`` if it exists.
 
@@ -119,7 +123,8 @@ class DocumentPatchedEvent(DocumentChangedEvent):
             receiver._document_patched(self)
 
     def generate(self, references, buffers):
-        ''' Create a JSON representation of this event suitable for sending
+        '''
+        Create a JSON representation of this event suitable for sending
         to clients.
 
         *Sub-classes must implement this method.*
@@ -171,7 +176,8 @@ class MessageSentEvent(DocumentPatchedEvent):
         return msg
 
 class ModelChangedEvent(DocumentPatchedEvent):
-    ''' A concrete event representing updating an attribute and value of a
+    '''
+    A concrete event representing updating an attribute and value of a
     specific Bokeh Model.
 
     This is the "standard" way of updating most Bokeh model attributes. For
@@ -256,7 +262,8 @@ class ModelChangedEvent(DocumentPatchedEvent):
         return False
 
     def dispatch(self, receiver):
-        ''' Dispatch handling of this event to a receiver.
+        '''
+        Dispatch handling of this event to a receiver.
 
         This method will invoke ``receiver._document_model_changed`` if it exists.
 
@@ -266,7 +273,8 @@ class ModelChangedEvent(DocumentPatchedEvent):
             receiver._document_model_changed(self)
 
     def generate(self, references, buffers):
-        ''' Create a JSON representation of this event suitable for sending
+        '''
+        Create a JSON representation of this event suitable for sending
         to clients.
 
         Args:
@@ -318,7 +326,8 @@ class ModelChangedEvent(DocumentPatchedEvent):
                  'new'   : value }
 
 class ColumnDataChangedEvent(DocumentPatchedEvent):
-    ''' A concrete event representing efficiently replacing *all*
+    '''
+    A concrete event representing efficiently replacing *all*
     existing data for a :class:`~bokeh.models.sources.ColumnDataSource`
 
     '''
@@ -355,7 +364,8 @@ class ColumnDataChangedEvent(DocumentPatchedEvent):
         self.cols = cols
 
     def dispatch(self, receiver):
-        ''' Dispatch handling of this event to a receiver.
+        '''
+        Dispatch handling of this event to a receiver.
 
         This method will invoke ``receiver._column_data_changed`` if it exists.
 
@@ -365,7 +375,8 @@ class ColumnDataChangedEvent(DocumentPatchedEvent):
             receiver._column_data_changed(self)
 
     def generate(self, references, buffers):
-        ''' Create a JSON representation of this event suitable for sending
+        '''
+        Create a JSON representation of this event suitable for sending
         to clients.
 
         .. code-block:: python
@@ -404,7 +415,8 @@ class ColumnDataChangedEvent(DocumentPatchedEvent):
                  'cols'          : self.cols}
 
 class ColumnsStreamedEvent(DocumentPatchedEvent):
-    ''' A concrete event representing efficiently streaming new data
+    '''
+    A concrete event representing efficiently streaming new data
     to a :class:`~bokeh.models.sources.ColumnDataSource`
 
     '''
@@ -452,7 +464,8 @@ class ColumnsStreamedEvent(DocumentPatchedEvent):
         self.rollover = rollover
 
     def dispatch(self, receiver):
-        ''' Dispatch handling of this event to a receiver.
+        '''
+        Dispatch handling of this event to a receiver.
 
         This method will invoke ``receiver._columns_streamed`` if it exists.
 
@@ -496,7 +509,8 @@ class ColumnsStreamedEvent(DocumentPatchedEvent):
                  'rollover'      : self.rollover }
 
 class ColumnsPatchedEvent(DocumentPatchedEvent):
-    ''' A concrete event representing efficiently applying data patches
+    '''
+    A concrete event representing efficiently applying data patches
     to a :class:`~bokeh.models.sources.ColumnDataSource`
 
     '''
@@ -531,7 +545,8 @@ class ColumnsPatchedEvent(DocumentPatchedEvent):
         self.patches = patches
 
     def dispatch(self, receiver):
-        ''' Dispatch handling of this event to a receiver.
+        '''
+        Dispatch handling of this event to a receiver.
 
         This method will invoke ``receiver._columns_patched`` if it exists.
 
@@ -541,7 +556,8 @@ class ColumnsPatchedEvent(DocumentPatchedEvent):
             receiver._columns_patched(self)
 
     def generate(self, references, buffers):
-        ''' Create a JSON representation of this event suitable for sending
+        '''
+        Create a JSON representation of this event suitable for sending
         to clients.
 
         .. code-block:: python
@@ -573,7 +589,8 @@ class ColumnsPatchedEvent(DocumentPatchedEvent):
                  'patches'       : self.patches }
 
 class TitleChangedEvent(DocumentPatchedEvent):
-    ''' A concrete event representing a change to the title of a Bokeh
+    '''
+    A concrete event representing a change to the title of a Bokeh
     Document.
 
     '''
@@ -621,7 +638,8 @@ class TitleChangedEvent(DocumentPatchedEvent):
         return True
 
     def generate(self, references, buffers):
-        ''' Create a JSON representation of this event suitable for sending
+        '''
+        Create a JSON representation of this event suitable for sending
         to clients.
 
         .. code-block:: python
@@ -651,7 +669,8 @@ class TitleChangedEvent(DocumentPatchedEvent):
                  'title' : self.title }
 
 class RootAddedEvent(DocumentPatchedEvent):
-    ''' A concrete event representing a change to add a new Model to a
+    '''
+    A concrete event representing a change to add a new Model to a
     Document's collection of "root" models.
 
     '''
@@ -683,7 +702,8 @@ class RootAddedEvent(DocumentPatchedEvent):
         self.model = model
 
     def generate(self, references, buffers):
-        ''' Create a JSON representation of this event suitable for sending
+        '''
+        Create a JSON representation of this event suitable for sending
         to clients.
 
         .. code-block:: python
@@ -714,7 +734,8 @@ class RootAddedEvent(DocumentPatchedEvent):
                  'model' : self.model.ref }
 
 class RootRemovedEvent(DocumentPatchedEvent):
-    ''' A concrete event representing a change to remove an existing Model
+    '''
+    A concrete event representing a change to remove an existing Model
     from a Document's collection of "root" models.
 
     '''
@@ -747,7 +768,8 @@ class RootRemovedEvent(DocumentPatchedEvent):
         self.model = model
 
     def generate(self, references, buffers):
-        ''' Create a JSON representation of this event suitable for sending
+        '''
+        Create a JSON representation of this event suitable for sending
         to clients.
 
         .. code-block:: python
@@ -777,7 +799,8 @@ class RootRemovedEvent(DocumentPatchedEvent):
                  'model' : self.model.ref }
 
 class SessionCallbackAdded(DocumentChangedEvent):
-    ''' A concrete event representing a change to add a new callback (e.g.
+    '''
+    A concrete event representing a change to add a new callback (e.g.
     periodic, timeout, or "next tick") to a Document.
 
     '''
@@ -797,7 +820,8 @@ class SessionCallbackAdded(DocumentChangedEvent):
         self.callback = callback
 
     def dispatch(self, receiver):
-        ''' Dispatch handling of this event to a receiver.
+        '''
+        Dispatch handling of this event to a receiver.
 
         This method will invoke ``receiver._session_callback_added`` if
         it exists.
@@ -808,7 +832,8 @@ class SessionCallbackAdded(DocumentChangedEvent):
             receiver._session_callback_added(self)
 
 class SessionCallbackRemoved(DocumentChangedEvent):
-    ''' A concrete event representing a change to remove an existing callback
+    '''
+    A concrete event representing a change to remove an existing callback
     (e.g. periodic, timeout, or "next tick") from a Document.
 
 
@@ -829,7 +854,8 @@ class SessionCallbackRemoved(DocumentChangedEvent):
         self.callback = callback
 
     def dispatch(self, receiver):
-        ''' Dispatch handling of this event to a receiver.
+        '''
+        Dispatch handling of this event to a receiver.
 
         This method will invoke ``receiver._session_callback_removed`` if
         it exists.

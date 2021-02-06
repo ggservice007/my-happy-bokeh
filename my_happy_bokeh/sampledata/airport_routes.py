@@ -1,6 +1,16 @@
-'''
-Provide classes for representing RGB(A) and HSL(A) colors, as well as
-define common named colors.
+#-----------------------------------------------------------------------------
+# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
+# All rights reserved.
+#
+# The full license is in the file LICENSE.txt, distributed with this software.
+#-----------------------------------------------------------------------------
+''' The data in airports.csv and routes.csv is a subset (limited to US airports)
+of data available from OpenFlights.org. The complete data was collected on
+September 07, 2017 and is available from:
+
+.. code-block:: none
+
+    https://openflights.org/data.html
 
 '''
 
@@ -15,28 +25,20 @@ log = logging.getLogger(__name__)
 #-----------------------------------------------------------------------------
 
 # Bokeh imports
-from . import groups, named
-from .color import Color
-from .hsl import HSL
-from .rgb import RGB
+from ..util.sampledata import external_csv
 
 #-----------------------------------------------------------------------------
 # Globals and constants
 #-----------------------------------------------------------------------------
 
 __all__ = (
-    'Color',
-    'HSL',
-    'RGB',
-    'groups',
-    'named',
+    'airports',
+    'routes',
 )
 
 #-----------------------------------------------------------------------------
 # General API
 #-----------------------------------------------------------------------------
-
-
 
 #-----------------------------------------------------------------------------
 # Dev API
@@ -49,3 +51,6 @@ __all__ = (
 #-----------------------------------------------------------------------------
 # Code
 #-----------------------------------------------------------------------------
+
+airports = external_csv('airport_routes', 'airports.csv')
+routes   = external_csv('airport_routes', 'routes.csv')

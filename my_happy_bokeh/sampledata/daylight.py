@@ -1,6 +1,10 @@
-'''
-Provide classes for representing RGB(A) and HSL(A) colors, as well as
-define common named colors.
+#-----------------------------------------------------------------------------
+# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
+# All rights reserved.
+#
+# The full license is in the file LICENSE.txt, distributed with this software.
+#-----------------------------------------------------------------------------
+''' Provide 2013 Warsaw daylight hours from http://www.sunrisesunset.com
 
 '''
 
@@ -15,28 +19,19 @@ log = logging.getLogger(__name__)
 #-----------------------------------------------------------------------------
 
 # Bokeh imports
-from . import groups, named
-from .color import Color
-from .hsl import HSL
-from .rgb import RGB
+from ..util.sampledata import package_csv
 
 #-----------------------------------------------------------------------------
 # Globals and constants
 #-----------------------------------------------------------------------------
 
 __all__ = (
-    'Color',
-    'HSL',
-    'RGB',
-    'groups',
-    'named',
+    'daylight_warsaw_2013',
 )
 
 #-----------------------------------------------------------------------------
 # General API
 #-----------------------------------------------------------------------------
-
-
 
 #-----------------------------------------------------------------------------
 # Dev API
@@ -46,6 +41,20 @@ __all__ = (
 # Private API
 #-----------------------------------------------------------------------------
 
+def _read_data():
+    '''
+
+    '''
+    df = package_csv('daylight', 'daylight_warsaw_2013.csv', parse_dates=["Date", "Sunrise", "Sunset"])
+
+    df["Date"] = df.Date.map(lambda x: x.date())
+    df["Sunrise"] = df.Sunrise.map(lambda x: x.time())
+    df["Sunset"] = df.Sunset.map(lambda x: x.time())
+
+    return df
+
 #-----------------------------------------------------------------------------
 # Code
 #-----------------------------------------------------------------------------
+
+daylight_warsaw_2013 = _read_data()

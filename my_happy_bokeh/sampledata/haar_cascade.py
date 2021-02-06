@@ -1,6 +1,10 @@
+#-----------------------------------------------------------------------------
+# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
+# All rights reserved.
+#
+# The full license is in the file LICENSE.txt, distributed with this software.
+#-----------------------------------------------------------------------------
 '''
-Provide classes for representing RGB(A) and HSL(A) colors, as well as
-define common named colors.
 
 '''
 
@@ -11,32 +15,25 @@ import logging # isort:skip
 log = logging.getLogger(__name__)
 
 #-----------------------------------------------------------------------------
-# Imports
+# Import
 #-----------------------------------------------------------------------------
 
 # Bokeh imports
-from . import groups, named
-from .color import Color
-from .hsl import HSL
-from .rgb import RGB
+from ..util.sampledata import external_path
 
 #-----------------------------------------------------------------------------
 # Globals and constants
 #-----------------------------------------------------------------------------
 
 __all__ = (
-    'Color',
-    'HSL',
-    'RGB',
-    'groups',
-    'named',
+    'frontalface_default_path',
 )
 
 #-----------------------------------------------------------------------------
 # General API
 #-----------------------------------------------------------------------------
 
-
+frontalface_default_path = external_path('haarcascade_frontalface_default.xml')
 
 #-----------------------------------------------------------------------------
 # Dev API

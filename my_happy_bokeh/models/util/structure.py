@@ -26,8 +26,8 @@ Based on a private class, _BokehStructureGraph.
 from itertools import permutations
 
 # Bokeh imports
-from my_happy_bokeh.layouts import column
-from my_happy_bokeh.models import (
+from ...layouts import column
+from ...models import (
     BoxZoomTool,
     CDSView,
     Circle,

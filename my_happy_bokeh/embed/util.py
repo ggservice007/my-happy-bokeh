@@ -47,7 +47,8 @@ __all__ = (
 #-----------------------------------------------------------------------------
 
 class FromCurdoc:
-    ''' This class merely provides a non-None default value for ``theme``
+    '''
+    This class merely provides a non-None default value for ``theme``
     arguments, since ``None`` itself is a meaningful value for users to pass.
 
     '''
@@ -55,7 +56,8 @@ class FromCurdoc:
 
 @contextmanager
 def OutputDocumentFor(objs, apply_theme=None, always_new=False):
-    ''' Find or create a (possibly temporary) Document to use for serializing
+    '''
+    Find or create a (possibly temporary) Document to use for serializing
     Bokeh content.
 
     Typical usage is similar to:
@@ -294,7 +296,8 @@ def standalone_docs_json_and_render_items(models, suppress_callback_warning=Fals
     return (docs_json, render_items)
 
 def submodel_has_python_callbacks(models):
-    ''' Traverses submodels to check for Python (event) callbacks
+    '''
+    Traverses submodels to check for Python (event) callbacks
 
     '''
     has_python_callback = False

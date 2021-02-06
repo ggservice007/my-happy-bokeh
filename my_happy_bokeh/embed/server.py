@@ -39,7 +39,8 @@ __all__ = (
 #-----------------------------------------------------------------------------
 
 def server_document(url="default", relative_urls=False, resources="default", arguments=None, headers=None):
-    ''' Return a script tag that embeds content from a Bokeh server.
+    '''
+    Return a script tag that embeds content from a Bokeh server.
 
     Bokeh apps embedded using these methods will NOT set the browser window title.
 
@@ -107,7 +108,8 @@ def server_document(url="default", relative_urls=False, resources="default", arg
     return tag
 
 def server_session(model=None, session_id=None, url="default", relative_urls=False, resources="default", headers={}):
-    ''' Return a script tag that embeds content from a specific existing session on
+    '''
+    Return a script tag that embeds content from a specific existing session on
     a Bokeh server.
 
     This function is typically only useful for serving from a a specific session
@@ -238,7 +240,8 @@ def server_html_page_for_session(session, resources, title, template=FILE, templ
 #-----------------------------------------------------------------------------
 
 def _clean_url(url):
-    ''' Produce a canonical Bokeh server URL.
+    '''
+    Produce a canonical Bokeh server URL.
 
     Args:
         url (str)
@@ -258,7 +261,8 @@ def _clean_url(url):
     return url.rstrip("/")
 
 def _get_app_path(url):
-    ''' Extract the app path from a Bokeh server URL
+    '''
+    Extract the app path from a Bokeh server URL
 
     Args:
         url (str) :
@@ -273,7 +277,8 @@ def _get_app_path(url):
     return app_path
 
 def _process_arguments(arguments):
-    ''' Return user-supplied HTML arguments to add to a Bokeh server URL.
+    '''
+    Return user-supplied HTML arguments to add to a Bokeh server URL.
 
     Args:
         arguments (dict[str, object]) :
@@ -291,7 +296,8 @@ def _process_arguments(arguments):
     return result
 
 def _process_app_path(app_path):
-    ''' Return an app path HTML argument to add to a Bokeh server URL.
+    '''
+    Return an app path HTML argument to add to a Bokeh server URL.
 
     Args:
         app_path (str) :
@@ -321,7 +327,8 @@ def _process_relative_urls(relative_urls, url):
     return "&bokeh-absolute-url=" + url
 
 def _process_resources(resources):
-    ''' Return an argument to suppress normal Bokeh server resources, if requested.
+    '''
+    Return an argument to suppress normal Bokeh server resources, if requested.
 
     Args:
         resources ("default" or None) :
@@ -338,7 +345,8 @@ def _process_resources(resources):
     return ""
 
 def _src_path(url, elementid):
-    ''' Return a base autoload URL for a given element ID
+    '''
+    Return a base autoload URL for a given element ID
 
     Args:
         url (str) :

@@ -1,6 +1,19 @@
-'''
-Provide classes for representing RGB(A) and HSL(A) colors, as well as
-define common named colors.
+#-----------------------------------------------------------------------------
+# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
+# All rights reserved.
+#
+# The full license is in the file LICENSE.txt, distributed with this software.
+#-----------------------------------------------------------------------------
+''' The data in world_cities.csv was taken from GeoNames ``cities5000.zip``
+downloaded from
+
+.. code-block:: none
+
+    http://www.geonames.org/export/
+
+on Tuesday September 15, 2015.
+
+Under ``CC-BY`` license (creative commons attributions license).
 
 '''
 
@@ -15,28 +28,19 @@ log = logging.getLogger(__name__)
 #-----------------------------------------------------------------------------
 
 # Bokeh imports
-from . import groups, named
-from .color import Color
-from .hsl import HSL
-from .rgb import RGB
+from ..util.sampledata import external_csv
 
 #-----------------------------------------------------------------------------
 # Globals and constants
 #-----------------------------------------------------------------------------
 
 __all__ = (
-    'Color',
-    'HSL',
-    'RGB',
-    'groups',
-    'named',
+    'data',
 )
 
 #-----------------------------------------------------------------------------
 # General API
 #-----------------------------------------------------------------------------
-
-
 
 #-----------------------------------------------------------------------------
 # Dev API
@@ -49,3 +53,5 @@ __all__ = (
 #-----------------------------------------------------------------------------
 # Code
 #-----------------------------------------------------------------------------
+
+data = external_csv('world_cities', 'world_cities.csv')

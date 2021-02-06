@@ -1,6 +1,30 @@
-'''
-Provide classes for representing RGB(A) and HSL(A) colors, as well as
-define common named colors.
+#-----------------------------------------------------------------------------
+# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
+# All rights reserved.
+#
+# The full license is in the file LICENSE.txt, distributed with this software.
+#-----------------------------------------------------------------------------
+''' Provide a table of data regarding bachelors degrees earned by women,
+broken down by field for any given year. It exposes an attribute ``data`` which
+is a pandas DataFrame with the following fields:
+
+    Year
+    Agriculture
+    Architecture
+    Art and Performance
+    Biology
+    Business
+    Communications and Journalism
+    Computer Science,Education
+    Engineering
+    English
+    Foreign Languages
+    Health Professions
+    Math and Statistics
+    Physical Sciences
+    Psychology
+    Public Administration
+    Social Sciences and History
 
 '''
 
@@ -15,28 +39,19 @@ log = logging.getLogger(__name__)
 #-----------------------------------------------------------------------------
 
 # Bokeh imports
-from . import groups, named
-from .color import Color
-from .hsl import HSL
-from .rgb import RGB
+from ..util.sampledata import package_csv
 
 #-----------------------------------------------------------------------------
 # Globals and constants
 #-----------------------------------------------------------------------------
 
 __all__ = (
-    'Color',
-    'HSL',
-    'RGB',
-    'groups',
-    'named',
+    'data',
 )
 
 #-----------------------------------------------------------------------------
 # General API
 #-----------------------------------------------------------------------------
-
-
 
 #-----------------------------------------------------------------------------
 # Dev API
@@ -49,3 +64,5 @@ __all__ = (
 #-----------------------------------------------------------------------------
 # Code
 #-----------------------------------------------------------------------------
+
+data = package_csv('degrees', 'percent-bachelors-degrees-women-usa.csv')

@@ -43,7 +43,8 @@ __all__ = (
 ThemeSource = Union[Theme, FromCurdoc, None]
 
 def notebook_content(model: Model, notebook_comms_target: Optional[str] = None, theme: ThemeSource = FromCurdoc) -> Tuple[str, str, Document]:
-    ''' Return script and div that will display a Bokeh plot in a Jupyter
+    '''
+    Return script and div that will display a Bokeh plot in a Jupyter
     Notebook.
 
     The data for the plot is stored directly in the returned HTML.

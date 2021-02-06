@@ -1,6 +1,15 @@
-'''
-Provide classes for representing RGB(A) and HSL(A) colors, as well as
-define common named colors.
+#-----------------------------------------------------------------------------
+# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
+# All rights reserved.
+#
+# The full license is in the file LICENSE.txt, distributed with this software.
+#-----------------------------------------------------------------------------
+''' Provide U.S. marriage and divorce statistics between 1867 and 2014
+
+Data from the CDC's National Center for Health Statistics (NHCS) database
+(http://www.cdc.gov/nchs/).
+
+Data organized by Randal S. Olson (http://www.randalolson.com)
 
 '''
 
@@ -15,28 +24,19 @@ log = logging.getLogger(__name__)
 #-----------------------------------------------------------------------------
 
 # Bokeh imports
-from . import groups, named
-from .color import Color
-from .hsl import HSL
-from .rgb import RGB
+from ..util.sampledata import package_csv
 
 #-----------------------------------------------------------------------------
 # Globals and constants
 #-----------------------------------------------------------------------------
 
 __all__ = (
-    'Color',
-    'HSL',
-    'RGB',
-    'groups',
-    'named',
+    'data',
 )
 
 #-----------------------------------------------------------------------------
 # General API
 #-----------------------------------------------------------------------------
-
-
 
 #-----------------------------------------------------------------------------
 # Dev API
@@ -46,6 +46,16 @@ __all__ = (
 # Private API
 #-----------------------------------------------------------------------------
 
+def _read_data():
+    '''
+
+    '''
+
+    data = package_csv('us_marriages_divorces', 'us_marriages_divorces.csv')
+    return data.interpolate(method='linear', axis=0).ffill().bfill()
+
 #-----------------------------------------------------------------------------
 # Code
 #-----------------------------------------------------------------------------
+
+data = _read_data()

@@ -40,7 +40,8 @@ __all__ = (
 #-----------------------------------------------------------------------------
 
 def initialize_references_json(references_json, references, setter=None):
-    ''' Given a JSON representation of the models in a graph, and new model
+    '''
+    Given a JSON representation of the models in a graph, and new model
     objects, set the properties on the models from the JSON
 
     Args:
@@ -83,7 +84,8 @@ def initialize_references_json(references_json, references, setter=None):
         instance.update_from_json(obj_attrs, models=references, setter=setter)
 
 def instantiate_references_json(references_json, existing_instances: Dict[str, HasProps]):
-    ''' Given a JSON representation of all the models in a graph, return a
+    '''
+    Given a JSON representation of all the models in a graph, return a
     dict of new model objects.
 
     Args:
@@ -113,7 +115,8 @@ def instantiate_references_json(references_json, existing_instances: Dict[str, H
     return references
 
 def references_json(references):
-    ''' Given a list of all models in a graph, return JSON representing
+    '''
+    Given a list of all models in a graph, return JSON representing
     them and their properties.
 
     Args:

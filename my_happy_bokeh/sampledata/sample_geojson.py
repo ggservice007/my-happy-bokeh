@@ -1,6 +1,15 @@
-'''
-Provide classes for representing RGB(A) and HSL(A) colors, as well as
-define common named colors.
+#-----------------------------------------------------------------------------
+# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
+# All rights reserved.
+#
+# The full license is in the file LICENSE.txt, distributed with this software.
+#-----------------------------------------------------------------------------
+''' Provide geojson of the UK NHS' England area teams.
+
+The data was downloaded from https://github.com/JeniT/nhs-choices on
+November 14th, 2015. It is a geojson representation of open data available
+from NHS Choices. It was downloaded for demonstration purposes only, it is
+not kept up to date.
 
 '''
 
@@ -15,28 +24,19 @@ log = logging.getLogger(__name__)
 #-----------------------------------------------------------------------------
 
 # Bokeh imports
-from . import groups, named
-from .color import Color
-from .hsl import HSL
-from .rgb import RGB
+from ..util.sampledata import package_path
 
 #-----------------------------------------------------------------------------
 # Globals and constants
 #-----------------------------------------------------------------------------
 
 __all__ = (
-    'Color',
-    'HSL',
-    'RGB',
-    'groups',
-    'named',
+    'geojson',
 )
 
 #-----------------------------------------------------------------------------
 # General API
 #-----------------------------------------------------------------------------
-
-
 
 #-----------------------------------------------------------------------------
 # Dev API
@@ -49,3 +49,6 @@ __all__ = (
 #-----------------------------------------------------------------------------
 # Code
 #-----------------------------------------------------------------------------
+
+with open(package_path('sample_geojson.geojson'), 'r') as f:
+    geojson = f.read()

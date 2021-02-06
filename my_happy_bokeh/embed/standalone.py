@@ -56,7 +56,8 @@ ModelLikeCollection = Union[Sequence[ModelLike], Dict[str, ModelLike]]
 ThemeLike = Union[None, Theme, Type[FromCurdoc]]
 
 def autoload_static(model: Union[Model, Document], resources: Resources, script_path: str) -> Tuple[str, str]:
-    ''' Return JavaScript code and a script tag that can be used to embed
+    '''
+    Return JavaScript code and a script tag that can be used to embed
     Bokeh Plots.
 
     The data for the plot is stored directly in the returned JavaScript code.
@@ -107,7 +108,8 @@ def autoload_static(model: Union[Model, Document], resources: Resources, script_
 
 def components(models: Union[ModelLike, ModelLikeCollection], wrap_script: bool = True,
                wrap_plot_info: bool = True, theme: ThemeLike = None) -> Tuple[str, Any]:
-    ''' Return HTML components to embed a Bokeh plot. The data for the plot is
+    '''
+    Return HTML components to embed a Bokeh plot. The data for the plot is
     stored directly in the returned HTML.
 
     An example can be found in examples/embed/embed_multiple.py
@@ -242,7 +244,8 @@ def file_html(models: Union[Model, Document, Sequence[Model]],
               theme: ThemeLike = None,
               suppress_callback_warning: bool = False,
               _always_new: bool = False) -> str:
-    ''' Return an HTML document that embeds Bokeh Model or Document objects.
+    '''
+    Return an HTML document that embeds Bokeh Model or Document objects.
 
     The data for the plot is stored directly in the returned HTML, with
     support for customizing the JS/CSS resources independently and
@@ -302,7 +305,8 @@ def file_html(models: Union[Model, Document, Sequence[Model]],
                                           template=template, template_variables=template_variables)
 
 def json_item(model: Model, target: Optional[str] = None, theme: ThemeLike = None) -> Any: # TODO: TypedDict?
-    ''' Return a JSON block that can be used to embed standalone Bokeh content.
+    '''
+    Return a JSON block that can be used to embed standalone Bokeh content.
 
     Args:
         model (Model) :

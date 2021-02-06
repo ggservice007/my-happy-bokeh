@@ -1,10 +1,5 @@
-#-----------------------------------------------------------------------------
-# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
-# All rights reserved.
-#
-# The full license is in the file LICENSE.txt, distributed with this software.
-#-----------------------------------------------------------------------------
-''' Provide the ``Document`` class, which is a container for Bokeh Models to
+'''
+Provide the ``Document`` class, which is a container for Bokeh Models to
 be reflected to the client side BokehJS library.
 
 As a concrete example, consider a column layout with ``Slider`` and ``Select``
@@ -89,7 +84,8 @@ __all__ = (
 #-----------------------------------------------------------------------------
 
 class Document:
-    ''' The basic unit of serialization for Bokeh.
+    '''
+    The basic unit of serialization for Bokeh.
 
     Document instances collect Bokeh models (e.g. plots, layouts, widgets,
     etc.) so that they may be reflected into the BokehJS client runtime.
@@ -135,21 +131,24 @@ class Document:
 
     @property
     def roots(self):
-        ''' A list of all the root models in this Document.
+        '''
+        A list of all the root models in this Document.
 
         '''
         return list(self._roots)
 
     @property
     def session_callbacks(self):
-        ''' A list of all the session callbacks on this document.
+        '''
+        A list of all the session callbacks on this document.
 
         '''
         return list(self._session_callbacks)
 
     @property
     def session_destroyed_callbacks(self):
-        ''' A list of all the on_session_destroyed callbacks on this document.
+        '''
+        A list of all the on_session_destroyed callbacks on this document.
 
         '''
         return self._session_destroyed_callbacks
@@ -160,14 +159,16 @@ class Document:
 
     @property
     def session_context(self):
-        ''' The ``SessionContext`` for this document.
+        '''
+        The ``SessionContext`` for this document.
 
         '''
         return self._session_context
 
     @property
     def template(self):
-        ''' A Jinja2 template to use for rendering this document.
+        '''
+        A Jinja2 template to use for rendering this document.
 
         '''
         return self._template
@@ -180,7 +181,8 @@ class Document:
 
     @property
     def template_variables(self):
-        ''' A dictionary of template variables to pass when rendering
+        '''
+        A dictionary of template variables to pass when rendering
         ``self.template``.
 
         '''
@@ -188,7 +190,8 @@ class Document:
 
     @property
     def theme(self):
-        ''' The current ``Theme`` instance affecting models in this Document.
+        '''
+        The current ``Theme`` instance affecting models in this Document.
 
         Setting this to ``None`` sets the default theme. (i.e this property
         never returns ``None``.)
@@ -225,7 +228,8 @@ class Document:
 
     @property
     def title(self):
-        ''' A title for this document.
+        '''
+        A title for this document.
 
         This title will be set on standalone HTML documents, but not e.g. when
         ``autoload_server`` is used.
@@ -240,7 +244,8 @@ class Document:
     # Public methods ----------------------------------------------------------
 
     def add_next_tick_callback(self, callback):
-        ''' Add callback to be invoked once on the next tick of the event loop.
+        '''
+        Add callback to be invoked once on the next tick of the event loop.
 
         Args:
             callback (callable) :
@@ -260,7 +265,8 @@ class Document:
         return self._add_session_callback(cb, callback, one_shot=True, originator=self.add_next_tick_callback)
 
     def add_periodic_callback(self, callback, period_milliseconds):
-        ''' Add a callback to be invoked on a session periodically.
+        '''
+        Add a callback to be invoked on a session periodically.
 
         Args:
             callback (callable) :
@@ -285,7 +291,8 @@ class Document:
         return self._add_session_callback(cb, callback, one_shot=False, originator=self.add_periodic_callback)
 
     def add_root(self, model, setter=None):
-        ''' Add a model as a root of this Document.
+        '''
+        Add a model as a root of this Document.
 
         Any changes to this model (including to other models referred to
         by it) will trigger ``on_change`` callbacks registered on this
@@ -321,7 +328,8 @@ class Document:
         self._trigger_on_change(RootAddedEvent(self, model, setter))
 
     def add_timeout_callback(self, callback, timeout_milliseconds):
-        ''' Add callback to be invoked once, after a specified timeout passes.
+        '''
+        Add callback to be invoked once, after a specified timeout passes.
 
         Args:
             callback (callable) :
@@ -358,7 +366,8 @@ class Document:
             cb(event)
 
     def apply_json_patch(self, patch, setter=None):
-        ''' Apply a JSON patch object and process any resulting events.
+        '''
+        Apply a JSON patch object and process any resulting events.
 
         Args:
             patch (JSON-data) :
@@ -451,7 +460,8 @@ class Document:
                 raise RuntimeError("Unknown patch event " + repr(event_json))
 
     def apply_json_patch_string(self, patch):
-        ''' Apply a JSON patch provided as a string.
+        '''
+        Apply a JSON patch provided as a string.
 
         Args:
             patch (str) :
@@ -464,7 +474,8 @@ class Document:
         self.apply_json_patch(json_parsed)
 
     def clear(self):
-        ''' Remove all content from the document but do not reset title.
+        '''
+        Remove all content from the document but do not reset title.
 
         Returns:
             None
@@ -499,7 +510,8 @@ class Document:
         gc.collect()
 
     def delete_modules(self):
-        ''' Clean up after any modules created by this Document when its session is
+        '''
+        Clean up after any modules created by this Document when its session is
         destroyed.
 
         '''
@@ -539,7 +551,8 @@ class Document:
 
     @classmethod
     def from_json(cls, json):
-        ''' Load a document from JSON.
+        '''
+        Load a document from JSON.
 
         json (JSON-data) :
             A JSON-encoded document to create a new Document from.
@@ -565,7 +578,8 @@ class Document:
 
     @classmethod
     def from_json_string(cls, json):
-        ''' Load a document from JSON.
+        '''
+        Load a document from JSON.
 
         json (str) :
             A string with a JSON-encoded document to create a new Document
@@ -579,7 +593,8 @@ class Document:
         return cls.from_json(json_parsed)
 
     def get_model_by_id(self, model_id):
-        ''' Find the model for the given ID in this document, or ``None`` if it
+        '''
+        Find the model for the given ID in this document, or ``None`` if it
         is not found.
 
         Args:
@@ -592,7 +607,8 @@ class Document:
         return self._all_models.get(model_id)
 
     def get_model_by_name(self, name):
-        ''' Find the model for the given name in this document, or ``None`` if
+        '''
+        Find the model for the given name in this document, or ``None`` if
         it is not found.
 
         Args:
@@ -605,7 +621,8 @@ class Document:
         return self._all_models_by_name.get_one(name, "Found more than one model named '%s'" % name)
 
     def hold(self, policy="combine"):
-        ''' Activate a document hold.
+        '''
+        Activate a document hold.
 
         While a hold is active, no model changes will be applied, or trigger
         callbacks. Once ``unhold`` is called, the events collected during the
@@ -651,7 +668,8 @@ class Document:
         self._hold = policy
 
     def unhold(self):
-        ''' Turn off any active document hold and apply any collected events.
+        '''
+        Turn off any active document hold and apply any collected events.
 
         Returns:
             None
@@ -686,7 +704,8 @@ class Document:
                 cb(msg_data)
 
     def on_event(self, event, *callbacks):
-        ''' Provide callbacks to invoke if a bokeh event is received.
+        '''
+        Provide callbacks to invoke if a bokeh event is received.
 
         '''
         if not isinstance(event, str) and issubclass(event, Event):
@@ -706,7 +725,8 @@ class Document:
             self._event_callbacks[event].extend(callbacks)
 
     def on_change(self, *callbacks):
-        ''' Provide callbacks to invoke if the document or any Model reachable
+        '''
+        Provide callbacks to invoke if the document or any Model reachable
         from its roots changes.
 
         '''
@@ -723,7 +743,8 @@ class Document:
             self._callbacks[receiver] = lambda event: event.dispatch(receiver)
 
     def on_session_destroyed(self, *callbacks):
-        ''' Provide callbacks to invoke when the session serving the Document
+        '''
+        Provide callbacks to invoke when the session serving the Document
         is destroyed
 
         '''
@@ -732,7 +753,8 @@ class Document:
             self._session_destroyed_callbacks.add(callback)
 
     def remove_next_tick_callback(self, callback_obj):
-        ''' Remove a callback added earlier with ``add_next_tick_callback``.
+        '''
+        Remove a callback added earlier with ``add_next_tick_callback``.
 
         Args:
             callback_obj : a value returned from ``add_next_tick_callback``
@@ -747,7 +769,8 @@ class Document:
         self._remove_session_callback(callback_obj, self.add_next_tick_callback)
 
     def remove_on_change(self, *callbacks):
-        ''' Remove a callback added earlier with ``on_change``.
+        '''
+        Remove a callback added earlier with ``on_change``.
 
         Raises:
             KeyError, if the callback was never added
@@ -757,7 +780,8 @@ class Document:
             del self._callbacks[callback]
 
     def remove_periodic_callback(self, callback_obj):
-        ''' Remove a callback added earlier with ``add_periodic_callback``
+        '''
+        Remove a callback added earlier with ``add_periodic_callback``
 
         Args:
             callback_obj : a value returned from ``add_periodic_callback``
@@ -772,7 +796,8 @@ class Document:
         self._remove_session_callback(callback_obj, self.add_periodic_callback)
 
     def remove_root(self, model, setter=None):
-        ''' Remove a model as root model from this Document.
+        '''
+        Remove a model as root model from this Document.
 
         Changes to this model may still trigger ``on_change`` callbacks
         on this document, if the model is still referred to by other
@@ -804,7 +829,8 @@ class Document:
         self._trigger_on_change(RootRemovedEvent(self, model, setter))
 
     def remove_timeout_callback(self, callback_obj):
-        ''' Remove a callback added earlier with ``add_timeout_callback``.
+        '''
+        Remove a callback added earlier with ``add_timeout_callback``.
 
         Args:
             callback_obj : a value returned from ``add_timeout_callback``
@@ -819,7 +845,8 @@ class Document:
         self._remove_session_callback(callback_obj, self.add_timeout_callback)
 
     def replace_with_json(self, json):
-        ''' Overwrite everything in this document with the JSON-encoded
+        '''
+        Overwrite everything in this document with the JSON-encoded
         document.
 
         json (JSON-data) :
@@ -833,7 +860,8 @@ class Document:
         replacement._destructively_move(self)
 
     def select(self, selector):
-        ''' Query this document for objects that match the given selector.
+        '''
+        Query this document for objects that match the given selector.
 
         Args:
             selector (JSON-like query dictionary) : you can query by type or by
@@ -850,7 +878,8 @@ class Document:
             return find(self._all_models.values(), selector)
 
     def select_one(self, selector):
-        ''' Query this document for objects that match the given selector.
+        '''
+        Query this document for objects that match the given selector.
         Raises an error if more than one object is found.  Returns
         single matching object, or None if nothing is found
 
@@ -870,7 +899,8 @@ class Document:
         return result[0]
 
     def set_select(self, selector, updates):
-        ''' Update objects that match a given selector with the specified
+        '''
+        Update objects that match a given selector with the specified
         attribute/value updates.
 
         Args:
@@ -889,7 +919,8 @@ class Document:
                 setattr(obj, key, val)
 
     def to_json(self):
-        ''' Convert this document to a JSON object.
+        '''
+        Convert this document to a JSON object.
 
         Return:
             JSON-data
@@ -902,7 +933,8 @@ class Document:
         return loads(doc_json)
 
     def to_json_string(self, indent=None) -> str:
-        ''' Convert the document to a JSON string.
+        '''
+        Convert the document to a JSON string.
 
         Args:
             indent (int or None, optional) : number of spaces to indent, or
@@ -930,7 +962,8 @@ class Document:
         return serialize_json(json, indent=indent)
 
     def validate(self):
-        ''' Perform integrity checks on the modes in this document.
+        '''
+        Perform integrity checks on the modes in this document.
 
         Returns:
             None
@@ -943,7 +976,8 @@ class Document:
     # Private methods ---------------------------------------------------------
 
     def _add_session_callback(self, callback_obj, callback, one_shot, originator):
-        ''' Internal implementation for adding session callbacks.
+        '''
+        Internal implementation for adding session callbacks.
 
         Args:
             callback_obj (SessionCallback) :
@@ -984,7 +1018,8 @@ class Document:
         return callback_obj
 
     def _destructively_move(self, dest_doc):
-        ''' Move all data in this doc to the dest_doc, leaving this doc empty.
+        '''
+        Move all data in this doc to the dest_doc, leaving this doc empty.
 
         Args:
             dest_doc (Document) :
@@ -1042,7 +1077,8 @@ class Document:
         return isinstance(selector[field], str)
 
     def _notify_change(self, model, attr, old, new, hint=None, setter=None, callback_invoker=None):
-        ''' Called by Model when it changes
+        '''
+        Called by Model when it changes
 
         '''
         # if name changes, update by-name index
@@ -1100,7 +1136,8 @@ class Document:
         self._all_models_by_name = recomputed_by_name
 
     def _remove_session_callback(self, callback_obj, originator):
-        ''' Remove a callback added earlier with ``add_periodic_callback``,
+        '''
+        Remove a callback added earlier with ``add_periodic_callback``,
         ``add_timeout_callback``, or ``add_next_tick_callback``.
 
         Returns:
@@ -1185,7 +1222,8 @@ class Document:
 
 
 def _combine_document_events(new_event, old_events):
-    ''' Attempt to combine a new event with a list of previous events.
+    '''
+    Attempt to combine a new event with a list of previous events.
 
     The ``old_event`` will be scanned in reverse, and ``.combine(new_event)``
     will be called on each. If a combination can be made, the function

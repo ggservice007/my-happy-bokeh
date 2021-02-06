@@ -1,6 +1,10 @@
+#-----------------------------------------------------------------------------
+# Copyright (c) 2012 - 2020, Anaconda, Inc., and Bokeh Contributors.
+# All rights reserved.
+#
+# The full license is in the file LICENSE.txt, distributed with this software.
+#-----------------------------------------------------------------------------
 '''
-Provide classes for representing RGB(A) and HSL(A) colors, as well as
-define common named colors.
 
 '''
 
@@ -15,28 +19,19 @@ log = logging.getLogger(__name__)
 #-----------------------------------------------------------------------------
 
 # Bokeh imports
-from . import groups, named
-from .color import Color
-from .hsl import HSL
-from .rgb import RGB
+from ..util.sampledata import package_csv
 
 #-----------------------------------------------------------------------------
 # Globals and constants
 #-----------------------------------------------------------------------------
 
 __all__ = (
-    'Color',
-    'HSL',
-    'RGB',
-    'groups',
-    'named',
+    'data',
 )
 
 #-----------------------------------------------------------------------------
 # General API
 #-----------------------------------------------------------------------------
-
-
 
 #-----------------------------------------------------------------------------
 # Dev API
@@ -46,6 +41,22 @@ __all__ = (
 # Private API
 #-----------------------------------------------------------------------------
 
+def _read_data():
+    '''
+
+    '''
+    from ..util.dependencies import import_required
+    module = 'commits'
+    pd = import_required('pandas', '%s sample data requires Pandas (http://pandas.pydata.org) to be installed' % module)
+
+    data = package_csv(module, 'commits.txt.gz', parse_dates=True, header=None, names=['day', 'datetime'], index_col='datetime')
+    data.index = pd.to_datetime(data.index, utc=True,).astype('datetime64[ns]').tz_localize('utc').tz_convert('US/Central')
+    data['time'] = data.index.time
+
+    return data
+
 #-----------------------------------------------------------------------------
 # Code
 #-----------------------------------------------------------------------------
+
+data = _read_data()
