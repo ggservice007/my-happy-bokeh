@@ -131,6 +131,9 @@ def references_json(references):
     references_json = []
     for r in references:
         struct = r.struct
+        #==== happy_modify start ====#
+        struct['type'] = struct['type'].split('.')[-1]
+        #==== happy_modify end   ====#
         struct['attributes'] = r._to_json_like(include_defaults=False)
         references_json.append(struct)
 
