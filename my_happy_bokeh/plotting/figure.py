@@ -36,7 +36,7 @@ from ._tools import process_active_tools, process_tools_arg
 # Globals and constants
 #-----------------------------------------------------------------------------
 
-DEFAULT_TOOLS = "pan,wheel_zoom,box_zoom,save,reset,help"
+DEFAULT_TOOLS = "pan,wheel_zoom,box_zoom,save,reset"
 
 __all__ = (
     'Figure',
@@ -168,6 +168,10 @@ class Figure(Plot):
 
         tool_objs, tool_map = process_tools_arg(self, opts.tools, opts.tooltips)
         self.add_tools(*tool_objs)
+
+        # hide logo default
+        self.toolbar.logo = None
+
         process_active_tools(self.toolbar, tool_map, opts.active_drag, opts.active_inspect, opts.active_scroll, opts.active_tap)
 
     @glyph_method(glyphs.AnnularWedge)

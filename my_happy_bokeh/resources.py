@@ -629,7 +629,7 @@ _DEV_PAT = re.compile(r"^(\d)+\.(\d)+\.(\d)+(dev|rc)")
 
 
 def _cdn_base_url():
-    return "https://cdn.bokeh.org"
+    return "http://127.0.0.1:7571"
 
 
 def _get_cdn_urls(version=None, minified=True, legacy=False):
@@ -645,13 +645,13 @@ def _get_cdn_urls(version=None, minified=True, legacy=False):
 
     base_url = _cdn_base_url()
     dev_container = "bokeh/dev"
-    rel_container = "bokeh/release"
+    rel_container = "javascript/bokeh"
 
     # check the 'dev' fingerprint
     container = dev_container if _DEV_PAT.match(version) else rel_container
 
     def mk_filename(comp, kind):
-        return f"{comp}-{version}{_legacy}{_minified}.{kind}"
+        return f"@{version}/{comp}{_legacy}{_minified}.{kind}"
 
     def mk_url(comp, kind):
         return f"{base_url}/{container}/" + mk_filename(comp, kind)
