@@ -38,7 +38,8 @@ __all__ = (
 #-----------------------------------------------------------------------------
 
 def default_filename(ext: str) -> str:
-    ''' Generate a default filename with a given extension, attempting to use
+    '''
+    Generate a default filename with a given extension, attempting to use
     the filename of the currently running process, if possible.
 
     If the filename of the current process is not available (or would not be
@@ -72,7 +73,8 @@ def default_filename(ext: str) -> str:
     return join(basedir, name + "." + ext)
 
 def detect_current_filename() -> Optional[str]:
-    ''' Attempt to return the filename of the currently running Python process
+    '''
+    Attempt to return the filename of the currently running Python process
 
     Returns None if the filename cannot be detected.
     '''
@@ -92,7 +94,8 @@ def detect_current_filename() -> Optional[str]:
     return filename
 
 def temp_filename(ext: str) -> str:
-    ''' Generate a temporary, writable filename with the given extension
+    '''
+    Generate a temporary, writable filename with the given extension
 
     '''
     return NamedTemporaryFile(suffix="." + ext).name
@@ -102,13 +105,15 @@ def temp_filename(ext: str) -> str:
 #-----------------------------------------------------------------------------
 
 def _no_access(basedir: str) -> bool:
-    ''' Return True if the given base dir is not accessible or writeable
+    '''
+    Return True if the given base dir is not accessible or writeable
 
     '''
     return not os.access(basedir, os.W_OK | os.X_OK)
 
 def _shares_exec_prefix(basedir: str) -> bool:
-    ''' Whether a give base directory is on the system exex prefix
+    '''
+    Whether a give base directory is on the system exex prefix
 
     '''
     # XXX: exec_prefix has type str so why the check?

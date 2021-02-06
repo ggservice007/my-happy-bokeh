@@ -57,7 +57,8 @@ __all__ = (
 #-----------------------------------------------------------------------------
 
 class State:
-    ''' Manage state related to controlling Bokeh output.
+    '''
+    Manage state related to controlling Bokeh output.
 
     '''
     def __init__(self):
@@ -69,7 +70,8 @@ class State:
 
     @property
     def document(self):
-        ''' A default :class:`~bokeh.document.Document` to use for all
+        '''
+        A default :class:`~bokeh.document.Document` to use for all
         output operations.
 
         '''
@@ -81,7 +83,8 @@ class State:
 
     @property
     def file(self):
-        ''' A dict with the default configuration for file output (READ ONLY)
+        '''
+        A dict with the default configuration for file output (READ ONLY)
 
         The dictionary value has the following form:
 
@@ -98,21 +101,24 @@ class State:
 
     @property
     def notebook(self):
-        ''' Whether to generate notebook output on show operations. (READ ONLY)
+        '''
+        Whether to generate notebook output on show operations. (READ ONLY)
 
         '''
         return self._notebook
 
     @property
     def notebook_type(self):
-        ''' Notebook type
+        '''
+        Notebook type
 
         '''
         return self._notebook_type
 
     @notebook_type.setter
     def notebook_type(self, notebook_type):
-        ''' Notebook type, acceptable values are 'jupyter' as well as any names
+        '''
+        Notebook type, acceptable values are 'jupyter' as well as any names
         defined by external notebook hooks that have been installed.
 
         '''
@@ -123,7 +129,8 @@ class State:
     # Public methods ----------------------------------------------------------
 
     def output_file(self, filename, title="Bokeh Plot", mode=None, root_dir=None):
-        ''' Configure output to a standalone HTML file.
+        '''
+        Configure output to a standalone HTML file.
 
         Calling ``output_file`` not clear the effects of any other calls to
         ``output_notebook``, etc. It adds an additional output destination
@@ -161,7 +168,8 @@ class State:
             log.info("Session output file '%s' already exists, will be overwritten." % filename)
 
     def output_notebook(self, notebook_type='jupyter'):
-        ''' Generate output in notebook cells.
+        '''
+        Generate output in notebook cells.
 
         Calling ``output_notebook`` not clear the effects of any other calls
         to ``output_file``, etc. It adds an additional output destination
@@ -176,7 +184,8 @@ class State:
         self.notebook_type = notebook_type
 
     def reset(self):
-        ''' Deactivate all currently active output modes and set ``curdoc()``
+        '''
+        Deactivate all currently active output modes and set ``curdoc()``
         to a fresh empty ``Document``.
 
         Subsequent calls to ``show()`` will not render until a new output mode
@@ -191,7 +200,8 @@ class State:
     # Private methods ---------------------------------------------------------
 
     def _reset_keeping_doc(self):
-        ''' Reset output modes but DO NOT replace the default Document
+        '''
+        Reset output modes but DO NOT replace the default Document
 
         '''
         self._file = None
@@ -199,14 +209,16 @@ class State:
         self._notebook_type = None
 
     def _reset_with_doc(self, doc):
-        ''' Reset output modes but DO replace the default Document
+        '''
+        Reset output modes but DO replace the default Document
 
         '''
         self._document = doc
         self._reset_keeping_doc()
 
 def curstate():
-    ''' Return the current State object
+    '''
+    Return the current State object
 
     Returns:
       State : the current default State object
