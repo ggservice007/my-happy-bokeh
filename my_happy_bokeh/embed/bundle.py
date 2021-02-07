@@ -160,7 +160,6 @@ def bundle_for_objs_and_resources(objs, resources):
             js_resources.js_components.remove("bokeh-widgets")
         if not use_tables and "bokeh-tables" in js_resources.js_components:
             js_resources.js_components.remove("bokeh-tables")
-
         js_files.extend(js_resources.js_files)
         js_raw.extend(js_resources.js_raw)
 
@@ -189,6 +188,12 @@ def bundle_for_objs_and_resources(objs, resources):
     ext = bundle_models(models)
     if ext is not None:
         js_raw.append(ext)
+
+
+    extra_resource_info = resources.get_extra_resource_info()
+
+    for item in extra_resource_info['extra_js']:
+        js_files.append(item['url'])
 
     return Bundle.of(js_files, js_raw, css_files, css_raw, js_resources.hashes if js_resources else {})
 

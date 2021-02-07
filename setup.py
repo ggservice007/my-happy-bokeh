@@ -10,16 +10,16 @@ install_requires = [
         ]
 
 
-from my_happy_graphviz import version
+from my_happy_bokeh import version
 
 setup(
-  name="my-happy-graphviz",
+  name="my-happy-bokeh",
   version=version.get_current(),
-  description="Python interface to Graphviz's Dot language",
+  description="Interactive Data Visualization in the browser, from Python. ",
   long_description=README,
   long_description_content_type="text/markdown",
   license="Apache 2",
-  url="https://github.com/ggservice007/my-happy-graphviz",
+  url="https://github.com/ggservice007/my-happy-bokeh",
   author="ggservice007",
   author_email="ggservice007@126.com",
   packages=find_packages(exclude=[""]),

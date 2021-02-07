@@ -14,12 +14,15 @@ log = logging.getLogger(__name__)
 
 # Standard library imports
 from os.path import abspath
+from pathlib import Path
 from warnings import warn
+import ujson
 
 # Bokeh imports
 from ..settings import settings
 from .state import curstate
 from .util import default_filename
+
 
 #-----------------------------------------------------------------------------
 # Globals and constants
@@ -77,8 +80,12 @@ def save(obj, filename=None, resources=None, title=None, template=None, state=No
     theme = state.document.theme
 
     filename, resources, title = _get_save_args(state, filename, resources, title)
-    _save_helper(obj, filename, resources, title, template, theme)
-    return abspath(filename)
+
+    file_url = _save_helper(obj, filename, resources, title, template, theme)
+    return {
+        'file_url': file_url,
+        'file_abs_path': abspath(filename)
+    }
 
 #-----------------------------------------------------------------------------
 # Dev API
@@ -139,10 +146,27 @@ def _save_helper(obj, filename, resources, title, template, theme=None):
 
     '''
     from ..embed import file_html
-    html = file_html(obj, resources, title=title, template=template, theme=theme)
+    directory_info = resources.get_public_work_directory_info()
+    file_path = Path(filename)
+    directory_path = Path(directory_info['path'], file_path.parent)
+    directory_path.mkdir(parents=True, exist_ok=True)
 
-    with open(filename, mode="w", encoding="utf-8") as f:
-        f.write(html)
+    html_info = file_html(obj, resources, filename, title=title, template=template, theme=theme)
+
+    with open(Path(directory_path, file_path.stem + '.json'),
+              mode="w", encoding="utf-8") as f:
+        f.write(ujson.dumps(html_info['docs_json']))
+
+    with open(Path(directory_path, file_path.stem + '.js'),
+              mode="w", encoding="utf-8") as f:
+        f.write(html_info['script'].strip())
+
+    with open(Path(directory_info['path'], filename), mode="w", encoding="utf-8") as f:
+        f.write(html_info['all_html_content'].strip())
+
+    file_url = directory_info['url'] + '/' + filename
+
+    return file_url
 
 #-----------------------------------------------------------------------------
 # Code

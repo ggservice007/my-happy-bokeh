@@ -238,6 +238,7 @@ def components(models: Union[ModelLike, ModelLikeCollection], wrap_script: bool 
 
 def file_html(models: Union[Model, Document, Sequence[Model]],
               resources: Union[Resources, Tuple[JSResources, CSSResources]],
+              filename: str,
               title: Optional[str] = None,
               template: Union[Template, str] = FILE,
               template_variables: Dict[str, Any] = {},
@@ -301,8 +302,19 @@ def file_html(models: Union[Model, Document, Sequence[Model]],
         (docs_json, render_items) = standalone_docs_json_and_render_items(models_seq, suppress_callback_warning=suppress_callback_warning)
         title = _title_from_models(models_seq, title)
         bundle = bundle_for_objs_and_resources([doc], resources)
-        return html_page_for_render_items(bundle, docs_json, render_items, title=title,
-                                          template=template, template_variables=template_variables)
+        html_info = html_page_for_render_items(
+                        bundle,
+                        docs_json,
+                        render_items,
+                        title=title,
+                        filename=filename,
+                        template=template,
+                        template_variables=template_variables)
+        return {
+           'all_html_content': html_info['html'],
+           'script': html_info['script'],
+           'docs_json': docs_json
+        }
 
 def json_item(model: Model, target: Optional[str] = None, theme: ThemeLike = None) -> Any: # TODO: TypedDict?
     '''

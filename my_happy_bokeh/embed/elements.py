@@ -15,7 +15,9 @@ log = logging.getLogger(__name__)
 
 # Standard library imports
 from html import escape
+from pathlib import Path
 from typing import List, Optional
+
 
 # Bokeh imports
 from ..core.json_encoder import serialize_json
@@ -58,7 +60,14 @@ def div_for_render_item(item: RenderItem) -> str:
     '''
     return PLOT_DIV.render(doc=item, macros=MACROS)
 
-def html_page_for_render_items(bundle, docs_json, render_items, title, template=None, template_variables={}):
+def html_page_for_render_items(
+            bundle,
+            docs_json,
+            render_items,
+            title,
+            filename: str='',
+            template=None,
+            template_variables={}):
     '''
     Render an HTML page from a template and Bokeh render items.
 
@@ -94,9 +103,11 @@ def html_page_for_render_items(bundle, docs_json, render_items, title, template=
     json = escape(serialize_json(docs_json), quote=False)
     json = wrap_in_script_tag(json, "application/json", json_id)
 
-    script = wrap_in_script_tag(script_for_render_items(json_id, render_items))
+    script = wrap_in_script_tag(script_for_render_items(json_id, render_items, filename=filename))
 
     context = template_variables.copy()
+
+    json = ''
 
     context.update(dict(
         title = title,
@@ -121,10 +132,17 @@ def html_page_for_render_items(bundle, docs_json, render_items, title, template=
         template = _env.from_string("{% extends base %}\n" + template)
 
     html = template.render(context)
-    return html
 
-def script_for_render_items(docs_json_or_id, render_items: List[RenderItem],
-                            app_path: Optional[str] = None, absolute_url: Optional[str] = None) -> str:
+    return {
+        'html': html,
+        'script': script_for_render_items(json_id, render_items, filename=filename)
+    }
+
+def script_for_render_items(docs_json_or_id,
+                            render_items: List[RenderItem],
+                            filename: str='',
+                            app_path: Optional[str]=None,
+                            absolute_url: Optional[str]=None) -> str:
     '''
     Render an script for Bokeh render items.
 
@@ -154,6 +172,21 @@ def script_for_render_items(docs_json_or_id, render_items: List[RenderItem],
         docs_json = docs_json.replace("'", "&#x27;")              # remove single quotes
         docs_json = docs_json.replace("\\", "\\\\")               # double encode escapes
         docs_json =  "'" + docs_json + "'"                        # JS string
+
+
+    docs_json = """
+    let docs_json = {};
+  await axios({
+          method: 'get',
+          url: '^^doc_json_url^^',
+        })
+        .then((res) => {
+          docs_json = res.data;
+        });
+      """.strip().replace(
+            '^^doc_json_url^^',
+            Path(filename).stem + '.json'
+        )
 
     js = DOC_JS.render(
         docs_json=docs_json,

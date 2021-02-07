@@ -151,8 +151,10 @@ def _show_file_with_state(obj, state, new, controller):
     '''
 
     '''
-    filename = save(obj, state=state)
-    controller.open("file://" + filename, new=NEW_PARAM[new])
+    file_info = save(obj, state=state)
+    controller.open(file_info['file_url'], new=NEW_PARAM[new])
+
+    return file_info
 
 def _show_with_state(obj, state, browser, new, notebook_handle=False):
     '''
@@ -168,7 +170,8 @@ def _show_with_state(obj, state, browser, new, notebook_handle=False):
         shown = True
 
     if state.file or not shown:
-        _show_file_with_state(obj, state, new, controller)
+        file_info = _show_file_with_state(obj, state, new, controller)
+        return file_info
 
     return comms_handle
 

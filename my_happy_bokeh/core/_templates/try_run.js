@@ -1,5 +1,5 @@
 (function(root) {
-  function embed_document(root) {
+  async function embed_document(root) {
     {% block code_to_run %}
     {% endblock %}
   }

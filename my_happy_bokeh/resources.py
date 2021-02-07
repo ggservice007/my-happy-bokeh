@@ -27,6 +27,7 @@ log = logging.getLogger(__name__)
 # -----------------------------------------------------------------------------
 
 # Standard library imports
+import requests
 import json
 import re
 from os.path import basename, join, relpath
@@ -61,6 +62,8 @@ DEFAULT_SERVER_HTTP_URL = "http://%s:%d/" % (DEFAULT_SERVER_HOST, DEFAULT_SERVER
 
 _SRI_HASHES = None
 
+def _cdn_base_url():
+    return "http://127.0.0.1:7571"
 
 def get_all_sri_hashes():
     """ Report SRI script hashes for all versions of BokehJS.
@@ -278,6 +281,18 @@ class BaseResources:
 
         self.base_dir = base_dir or bokehjsdir(self.dev)
 
+        self.cdn_base_url = _cdn_base_url()
+
+        url = self.cdn_base_url + '/work-directory-path'
+        res_json = requests.post(url).json()
+        self.public_work_directory_info = {
+            'url': _cdn_base_url() + '/' + res_json['relative'] + '/bokeh',
+            'path': res_json['absolute'] + '/bokeh'
+        }
+
+        url = self.cdn_base_url + '/bokeh-extra-resource'
+        self.extra_resource_info = requests.post(url).json()
+
     # Properties --------------------------------------------------------------
 
     @property
@@ -297,6 +312,15 @@ class BaseResources:
             return self._root_url
         else:
             return self._default_root_url
+
+    def get_cdn_base_url(self):
+        return self.cdn_base_url
+
+    def get_public_work_directory_info(self):
+        return self.public_work_directory_info
+
+    def get_extra_resource_info(self):
+        return self.extra_resource_info
 
     # Public methods ----------------------------------------------------------
 
@@ -358,6 +382,8 @@ class BaseResources:
         elif self.mode == "server":
             server = self._server_urls()
             files = list(server["urls"](self.components(kind), kind))
+
+
 
         return (files, raw, hashes)
 
@@ -628,8 +654,7 @@ class _SessionCoordinates:
 _DEV_PAT = re.compile(r"^(\d)+\.(\d)+\.(\d)+(dev|rc)")
 
 
-def _cdn_base_url():
-    return "http://127.0.0.1:7571"
+
 
 
 def _get_cdn_urls(version=None, minified=True, legacy=False):
@@ -654,7 +679,7 @@ def _get_cdn_urls(version=None, minified=True, legacy=False):
         return f"@{version}/{comp}{_legacy}{_minified}.{kind}"
 
     def mk_url(comp, kind):
-        return f"{base_url}/{container}/" + mk_filename(comp, kind)
+        return f"/{container}/" + mk_filename(comp, kind)
 
     result = {
         "urls": lambda components, kind: [mk_url(component, kind) for component in components],
