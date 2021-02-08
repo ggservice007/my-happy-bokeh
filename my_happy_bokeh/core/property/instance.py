@@ -67,7 +67,8 @@ class Instance(Property):
     def instance_type(self):
         if isinstance(self._instance_type, str):
             module, name = self._instance_type.rsplit(".", 1)
-            self._instance_type = getattr(import_module(module, "bokeh"), name)
+            module = 'my_happy_' + module
+            self._instance_type = getattr(import_module(module, "my_happy_bokeh"), name)
 
         return self._instance_type
 

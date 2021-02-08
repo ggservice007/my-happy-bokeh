@@ -102,9 +102,8 @@ def get_all_sri_hashes():
     global _SRI_HASHES
 
     if not _SRI_HASHES:
-        url = _cdn_base_url() + '/boken_template/_sri.json'
+        url = _cdn_base_url() + '/bokeh_template/_sri.json'
         _SRI_HASHES = requests.get(url).json()
-        print('happy_debug_0003', _SRI_HASHES)
 
     return dict(_SRI_HASHES)
 

@@ -75,8 +75,6 @@ def get_env():
 
     templates_path = res_json['absolute']
 
-    print('happy_debug_0002', templates_path)
-
     return Environment(loader=FileSystemLoader(templates_path))
 
 #-----------------------------------------------------------------------------
