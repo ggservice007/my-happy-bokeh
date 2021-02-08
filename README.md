@@ -1,6 +1,6 @@
 # my-happy-bokeh
 
-Interactive Data Visualization in the browser, from Python. Based on [bokeh](https://github.com/bokeh).
+Interactive Data Visualization in the browser, from Python. Inspired by [Bokeh](https://github.com/bokeh) and [Streamlit](https://github.com/streamlit/streamlit).
 
 
 ## install

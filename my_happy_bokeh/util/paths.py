@@ -37,6 +37,9 @@ def serverdir() -> str:
     if sys.platform == 'cygwin': path = realpath(path)
     return path
 
+def cdn_base_url():
+    return "http://127.0.0.1:7571"
+
 
 def bokehjsdir(dev: bool = False) -> str:
     """

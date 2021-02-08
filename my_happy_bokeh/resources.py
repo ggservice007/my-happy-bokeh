@@ -41,6 +41,7 @@ from .util.paths import ROOT_DIR, bokehjsdir
 from .util.token import generate_session_id
 from .util.version import is_full_release
 
+
 # -----------------------------------------------------------------------------
 # Globals and constants
 # -----------------------------------------------------------------------------
@@ -101,8 +102,9 @@ def get_all_sri_hashes():
     global _SRI_HASHES
 
     if not _SRI_HASHES:
-        with open(join(ROOT_DIR, "_sri.json")) as f:
-            _SRI_HASHES = json.load(f)
+        url = _cdn_base_url() + '/boken_template/_sri.json'
+        _SRI_HASHES = requests.get(url).json()
+        print('happy_debug_0003', _SRI_HASHES)
 
     return dict(_SRI_HASHES)
 

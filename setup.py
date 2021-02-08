@@ -6,7 +6,7 @@ HERE = pathlib.Path(__file__).parent
 README = (HERE / "README.md").read_text()
 
 install_requires = [
-            'pyparsing>=2.4.7'
+            
         ]
 
 

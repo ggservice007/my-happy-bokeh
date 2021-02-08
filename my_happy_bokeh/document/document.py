@@ -1196,7 +1196,7 @@ class Document:
         '''
 
         '''
-        from bokeh.io.doc import set_curdoc, curdoc
+        from my_happy_bokeh.io.doc import set_curdoc, curdoc
         old_doc = curdoc()
         try:
             if getattr(f, "nolock", False):

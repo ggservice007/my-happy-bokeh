@@ -30,11 +30,15 @@ log = logging.getLogger(__name__)
 
 # Standard library imports
 import json
+import requests
 import sys
 from os.path import dirname, join
 
+
 # External imports
 from jinja2 import Environment, FileSystemLoader, Markup
+
+from ..util import paths
 
 #-----------------------------------------------------------------------------
 # Globals and constants
@@ -65,12 +69,13 @@ __all__ = (
 def get_env():
     ''' Get the correct Jinja2 Environment, also for frozen scripts.
     '''
-    if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
-        # PyInstaller uses _MEIPASS and only works with jinja2.FileSystemLoader
-        templates_path = join(sys._MEIPASS, 'bokeh', 'core', '_templates')
-    else:
-        # Non-frozen Python and cx_Freeze can use __file__ directly
-        templates_path = join(dirname(__file__), '_templates')
+    url = paths.cdn_base_url() + '/bokeh-template-path'
+
+    res_json = requests.post(url).json()
+
+    templates_path = res_json['absolute']
+
+    print('happy_debug_0002', templates_path)
 
     return Environment(loader=FileSystemLoader(templates_path))
 
